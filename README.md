@@ -1,7 +1,10 @@
 # teaster
+
 Teaster: automate your dirty tester work and take time for a relaxing tea.
 
 # Introduction
+
+Here just some definitions to speak the same language.
 
 As a tester your work can be summarized in these steps:
 
@@ -23,49 +26,49 @@ As a tester your work can be summarized in these steps:
    
    An automation environment contains:
    
-    - runtime env 
-    - all the provisioned software (before or after) 
-    - reproducer
+    - a runtime environment
+    - all the provisioned software (before or after).
+      to be consistent we'll name that provisioning environment
+    - a reproducer
    
    An automation environment can be represented by a tuple:
    
-   `(runtime env, provisioned software, reproducer)`
+   `(runtime env, provisioning env, reproducer)`
    
    All the possible combinations of these three components create an automation environment:
    
    Cli automation environments
-    * (container, package before update, script bash)
-    * (container, package after update, script bash)
-    * (container + openqa instance, package before update, openqa testmodule)
-    * (cotaniner + openqa instance, package after  update, openqa testmodule)
-    * (vm, package before update, script bash)
-    * (vm, package after  update, script bash)
-    * (vm + openqa instance, package before update, openqa testmodule)
-    * (vm + openqa instance, package after  update, openqa testmodule)
+    * (container, packages before update, script bash)
+    * (container, packages after update, script bash)
+    * (container + openqa instance, packages before update, openqa testmodule)
+    * (cotaniner + openqa instance, packages after  update, openqa testmodule)
+    * (vm, packages before update, script bash)
+    * (vm, packages after  update, script bash)
+    * (vm + openqa instance, packages before update, openqa testmodule)
+    * (vm + openqa instance, packages after  update, openqa testmodule)
 
    Gui automation environments
-    * (container + openqa instance, package before update, openqa testmodule + needles)
-    * (cotaniner + openqa instance, package after  update, openqa testmodule + needles)
-    * (vm + openqam instance, package before update, openqa testmodule + needles)
-    * (vm + openqa instance, package after  update, openqa testmodule + needles)
+    * (container + openqa instance, packages before update, openqa testmodule + needles)
+    * (cotaniner + openqa instance, packages after  update, openqa testmodule + needles)
+    * (vm + openqam instance, packages before update, openqa testmodule + needles)
+    * (vm + openqa instance, packages after  update, openqa testmodule + needles)
     
 2. Provisioning of the runtime environment (and installation tests)
 
     We need to be sure that the packages we are testing can be installed on top of our runtime environment.
-    We are helped on that by tool like mtui but sometimes it needs some manual work and anyway it's not a completely automated process.
+    We are helped on that by tools like mtui but sometimes it needs some manual work and anyway it's not a completely automated process.
     
 3. Reproducing 
 
    Reproduce the bug before and after (update and downgrade)
-   Even in this phase mtui is our friend.
+   Even during this phase mtui is our friend.
    
 4. Comparison
 
-   
-In this scenario just only the first phase: the mental process to figure out the better reproducer
-really required an human intellectual intervention.
+In this scenario just only the first phase (the mental process to figure out the better reproducer)
+really requires an human intellectual intervention.
 
-The same reproducer is applied (manually) for different products. So all the steps of the entire process
+The same reproducer is applied (manually) to different products. So all the steps of the entire process
 are repeated by testers with a lof of wasting time.
 
 As a tester before going through all the entire process i want:
@@ -73,14 +76,26 @@ As a tester before going through all the entire process i want:
 Know if a tester has already worked on that bug, in other words if a reproducer for that particul bug already exists for other products. (We do that manually searching for a bug in qam.suse)
 
   if it's the first time that bug is tested (no reproducer for that bug)
-
-    1. Concentrate just only on the reproducer
-    2. Get automagically a runtime environment with the testing package installed (provisioning)
-    3. Once finished creating the reproducer push that one in a repository and share with all other testers in the future
+  
+   (a)
+   1. Concentrate just only on the reproducer
+   2. Get automagically a runtime env + a provisioning env (e.g. a container with all provisioned packages)
+   3. Once finished creating the reproducer, pack all (run env, prov env, reproducer) and push that one somewheree and share with all other testers in the future. In other words we're creating the tuple, the automation environment.
     
   if a reproducer already exists:
-    
-    1. Get automagically an automation environment with the testing package installed (provisioning) and the reproducer ready to be executed
-    2. Chose the runtime environment i like (container or vm)
-    3. Run the reproducer  (before and after)
-    4. Compare the results (before and after)
+   
+   (b)
+   1. Get automagically an automation environment with the testing package installed (provisioning) and the reproducer ready to be executed
+   2. Chose the runtime environment i like (container or vm)
+   3. Run the reproducer  (before and after)
+   4. Compare the results (before and after)
+
+In the first case (a) we build an automation environment joining our reproducer,the packages and the runtime environment.
+In the second one (b) we use an automation envinronment to test our bugs.
+
+What does teaster do for you?
+1. accept requests to create the couple (runtime environment, provisioning environment) and publish that one somewhere
+2. accept requests to create the tuple  (runtime environment, provisioning environment, reproducer). So it create an automation env and make it available to the tester.
+
+
+
