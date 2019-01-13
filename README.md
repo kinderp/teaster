@@ -93,9 +93,45 @@ Know if a tester has already worked on that bug, in other words if a reproducer 
 In the first case (a) we build an automation environment joining our reproducer,the packages and the runtime environment.
 In the second one (b) we use an automation envinronment to test our bugs.
 
-What does teaster do for you?
+# What does teaster do for you?
 1. accept requests to create the couple (runtime environment, provisioning environment) and publish that one somewhere
 2. accept requests to create the tuple  (runtime environment, provisioning environment, reproducer). So it create an automation env and make it available to the tester.
 
+# Who create the couple and the triple? Consumer!
+it's a consumer.
+A consumer get in input a request for an environment and works to produce in output the required env.
+A consumer knows how to handle only a specific product. So sle15 and sle12sp3 need two different consumer.
 
+# What Does a consumer know?
 
+* a source
+
+  it contain infos to create the required environment.
+  
+  For example:
+  
+  if the required env is a container a source will be the url for a Dockerfile
+  if the required env is a vm it will be the Vagranfile
+  (Docker is a specifi instance of a container runtime env and Vagrant it is for vm runtime env.
+   any instance of a runtime env cuold be taken in consideration)
+   
+* a destination
+  
+  an url to build the environment.
+  
+  For example:
+  
+  if the required env is a container, a url will point to a service that will build the image (from the 
+  Dockerfile) for us.
+  
+# The builder
+
+it builds our environment, it is bound to the url knokn by the consumer.
+It get infos (Dockerfile, Vagrantfile) from the consumer.
+
+  For example:
+  
+  * docker builder
+  * vagrant builder
+  
+  
