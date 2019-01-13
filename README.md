@@ -137,20 +137,27 @@ It get infos (Dockerfile, Vagrantfile) from the consumer.
   
 # Set up dev environment
 
-1. pip install virtualenvwrapper
+1. `pip install virtualenvwrapper`
 
-2. mkdir $HOME/dev
+2. `mkdir $HOME/dev`
 
-3. sudo find / -name virtualenvwrapper.sh
+3. `sudo find / -name virtualenvwrapper.sh`
 
 4. Add three lines to your shell startup file (.bashrc, .profile, etc.) to set the location where the virtual environments should live, the location of your development project directories, and the location of the script installed with this package:
 
-export WORKON_HOME=$HOME/.virtualenvs
+`export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
 source /usr/local/bin/virtualenvwrapper.sh # use the path obtained at point 3
+`
 
-5. cd $HOME/dev; git clone https://github.com/kinderp/teaster.git
+5. `cd $HOME/dev; git clone https://github.com/kinderp/teaster.git; cd $HOME/dev/teaster`
 
-6. mkvirtualenv teaster
+6. `mkvirtualenv teaster`
 
-Activate and deativate your env using workon and deactivate commands, see here for details https://virtualenvwrapper.readthedocs.io/en/latest/install.html
+Activate and deativate your env using `workon` and `deactivate` commands, see here for details https://virtualenvwrapper.readthedocs.io/en/latest/install.html
+
+# Set up the infrastructure
+
+1. Install docker and docker-compose
+2. cd `$HOME/dev/teaster`
+3. `docker-compose up`
