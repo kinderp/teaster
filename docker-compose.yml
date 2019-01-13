@@ -1,0 +1,34 @@
+# Before running docker-compuse up
+#
+# docker network create -d bridge teaster_net
+#
+
+version: '3'
+services:
+
+  rabbit:
+    container_name: rabbit
+    ports:
+        - "15672:15672"
+    networks:
+        - teaster_net
+    image: rabbitmq:3.6-management
+    volumes:
+        - /mnt/rabbit:/var/lib/rabbitmq
+    
+  teaster:
+    container_name: teaster
+    networks:
+        - teaster_net
+    image: teaster
+    build:
+      context: .
+      dockerfile: Dockerfile_teaster
+    volumes:
+        - /mnt/teaster:/mynode/data
+
+
+networks:
+  teaster_net:
+    external: true
+
