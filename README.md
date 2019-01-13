@@ -145,13 +145,11 @@ It get infos (Dockerfile, Vagrantfile) from the consumer.
 
 4. Add three lines to your shell startup file (.bashrc, .profile, etc.) to set the location where the virtual environments should live, the location of your development project directories, and the location of the script installed with this package:
 
-`
+```
 export WORKON_HOME=$HOME/.virtualenvs
-
 export PROJECT_HOME=$HOME/dev
-
 source /usr/local/bin/virtualenvwrapper.sh # use the path obtained at point 3
-`
+```
 
 5. `cd $HOME/dev; git clone https://github.com/kinderp/teaster.git; cd $HOME/dev/teaster`
 
