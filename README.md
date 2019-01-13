@@ -135,3 +135,22 @@ It get infos (Dockerfile, Vagrantfile) from the consumer.
   * vagrant builder
   
   
+# Set up dev environment
+
+1. pip install virtualenvwrapper
+
+2. mkdir $HOME/dev
+
+3. sudo find / -name virtualenvwrapper.sh
+
+4. Add three lines to your shell startup file (.bashrc, .profile, etc.) to set the location where the virtual environments should live, the location of your development project directories, and the location of the script installed with this package:
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/dev
+source /usr/local/bin/virtualenvwrapper.sh # use the path obtained at point 3
+
+5. cd $HOME/dev; git clone https://github.com/kinderp/teaster.git
+
+6. mkvirtualenv teaster
+
+Activate and deativate your env using workon and deactivate commands, see here for details https://virtualenvwrapper.readthedocs.io/en/latest/install.html
