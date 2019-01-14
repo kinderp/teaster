@@ -93,7 +93,7 @@ Know if a tester has already worked on that bug, in other words if a reproducer 
 In the first case (a) we build an automation environment joining our reproducer,the packages and the runtime environment.
 In the second one (b) we use an automation envinronment to test our bugs.
 
-# Uses Cases
+# Use Cases
 
 - **Autoregister** (uc#0)
  
