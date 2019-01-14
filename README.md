@@ -93,6 +93,57 @@ Know if a tester has already worked on that bug, in other words if a reproducer 
 In the first case (a) we build an automation environment joining our reproducer,the packages and the runtime environment.
 In the second one (b) we use an automation envinronment to test our bugs.
 
+# Uses Cases
+
+- **Autoregister** (uc#0)
+ 
+    _Actors_:
+
+         - A consumer: it want to inform the system about its presence and capabilities. 
+                       A consumer is able to handle only a runtime env and only a product
+
+    _Input_: 
+
+         - (run env, product) e.g. (docker, sle12sp3)
+
+    _Output_: 
+
+         - a consumer id. 
+           The system assigns an id to the consumer. 
+
+    _Description_:
+
+         - Before starting its lifecycle the consumer needs to inform the system 
+           about which particular run env and product it is able to handle
+
+- **Search for a consumer** (uc#1)
+ 
+     _Actors_:
+
+         - Started by guy: He want to create the couple (run env, prov env) for a new update in the queue.
+         - Tester        : He want to create the couple (run env, prov env) to investigate about something.
+
+         The actors must know the product (e.g. sle12sp3) for that couple. 
+         A consumer can handle only one run env and only one product.
+
+    _Input_: 
+
+         - (run env, product) e.g. (docker, sle12sp3)
+
+    _Output_: 
+
+         - a consumer id or an error. 
+
+    _Description_:
+
+         -  Request to search for a consumer that is able to create a couple for a particular product
+            and a particular run env.
+         - The system responds with a consumer id in case of success or some sort of error.
+
+- uc#2
+
+- uc#3
+
 # What does teaster do for you?
 1. accept requests to create the couple (runtime environment, provisioning environment) and publish that one somewhere
 2. accept requests to create the tuple  (runtime environment, provisioning environment, reproducer). So it create an automation env and make it available to the tester.
