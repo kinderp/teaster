@@ -120,11 +120,11 @@ In the second one (b) we use an automation envinronment to test our bugs.
  
      _Actors_:
 
-         - Started by guy: He want to create the couple (run env, prov env) for a new update in the queue.
-         - Tester        : He want to create the couple (run env, prov env) to investigate about something.
-
-         The actors must know the product (e.g. sle12sp3) for that couple. 
+         - Started by guy: He want to know if does exist a consumer is able to handle (run env, product) for a prov env.
+         - Tester        : same above.
+ 
          A consumer can handle only one run env and only one product.
+         prov env are the packages to test.
 
     _Input_: 
 
@@ -140,7 +140,30 @@ In the second one (b) we use an automation envinronment to test our bugs.
             and a particular run env.
          - The system responds with a consumer id in case of success or some sort of error.
 
-- uc#2
+- **Request for a couple** (uc#2)
+
+ 
+     _Actors_:
+
+         - Started by guy: He want to create the couple (run env, prov env) for a new update in the queue.
+         - Tester        : He want to create the couple (run env, prov env) to investigate about something.
+
+         The actors must know the consumer id obatained from uc#1. 
+
+    _Input_: 
+
+         - (container id, prov env) e.g. (docker, sle12sp3)
+
+    _Output_: 
+
+         - a consumer id or an error. 
+
+    _Description_:
+
+         -  Request to search for a consumer that is able to create a couple for a particular product
+            and a particular run env.
+         - The system responds with a consumer id in case of success or some sort of error.
+
 
 - uc#3
 
