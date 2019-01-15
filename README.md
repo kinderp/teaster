@@ -140,17 +140,83 @@ In the second one (b) we use an automation envinronment to test our bugs.
             and a particular run env.
          -  The system responds with a consumer id in case of success or some sort of error.
 
-- **Create a couple** (uc#2)
-
+- **Search for a reproducer** (uc#2)
  
+     _Actors_:
+
+         - Started by guy: He wants to know if already exist a reprodcuer for a bug.
+         - Tester        : same above.
+
+    _Input_: 
+
+         - (bug_id, reproducer_type) 
+
+    _Output_: 
+
+         - (reproducer_id, link to the reproducer)
+         
+         link to a bash script
+         link to a testmodule
+         link to testmodule and needles
+
+    _Description_:
+
+         -  Search for a reproducer
+         -  The system responds with a reproducer id and a link to view the reproducer or an error.
+         -  The reproduer id will be used to forward the triple creation request (run env, prov env, reproducer)
+            to the correct consumer. See above uc#1 to search for the correct consumer for a run env and a product 
+
+**Create a triple** (uc#3)
+
+     In this case the reproducer already exists. We got an id from #uc2.
+     
+     _Actors_:
+
+         - Started by guy: He wants to create the triple (run env, prov env, reproducer) for a new update in the queue.
+         - Tester        : He wants to create the couple (run env, prov env, reproducer) to investigate about something.
+         - A consumer    : It knows how to handle that particular run env and product. It contacts the builder.
+         - A builder     : It creates the triple: an automation env
+
+         The first 2 actors must know:
+         1. the consumer id   (from uc#1)
+         2. the reproducer id (from uc#2)
+
+    _Input_: 
+
+         - (consumer id, reproducer id, prov env) e.g. (1234, xxxxx, [a.x.y.z])
+
+    _Output_: 
+
+         - An url poiting to (run env, prov env, reproducer). 
+         
+            A registry url:
+            hashicorp/precise64
+            opensuse/tumbleweed 
+
+    _Description_:
+
+         -  The first 2 actors submit the request to the consumer, using the correct id.
+            The consumer creates or modifies the source (Dockerfile, Vagranfile) for provisioning of the testing packages and reproducer. 
+            Then the consumer forwards the modified source to the builder (destionation).
+            The builder builds (run env, prov env, reproducer) 
+            
+            (Note) the building process will be an asynchronous process so we need some sort of notification.
+
+
+
+- **Create a couple** (uc#4)
+
+    In this case the reproducer does not exist. We got an error from #uc2.
+    
      _Actors_:
 
          - Started by guy: He wants to create the couple (run env, prov env) for a new update in the queue.
          - Tester        : He wants to create the couple (run env, prov env) to investigate about something.
          - A consumer    : It knows how to handle that particular run env and product. It contacts the builder.
-         - A builder     : It creates the run env
+         - A builder     : It creates the run env.
 
-         The first 2 actors must know the consumer id obatained from uc#1. 
+         The first 2 actors must know:
+         1. the consumer id (from uc#1) 
 
     _Input_: 
 
@@ -167,14 +233,38 @@ In the second one (b) we use an automation envinronment to test our bugs.
     _Description_:
 
          -  The first 2 actors submit the request to the consumer, using the correct id.
-            The consumer creates or modifies the source (Dockerfile, Vagranfile) for provisioning. 
+            The consumer creates or modifies the source (Dockerfile, Vagranfile) for provisioning of testing packages. 
             Then the consumer forwards the modified source to the builder (destionation).
             The builder builds (run env, prov env) 
             
             (Note) the building process will be an asynchronous process so we need some sort of notification.
 
 
-- uc#3
+- **Share a reproducer** (uc#5)
+
+ 
+     _Actors_:
+
+         - Tester        : He wants to share a reproducer for a particular bug.
+
+    _Input_: 
+
+         - (bug id, reproducer) 
+
+    _Output_: 
+
+         - (link to the reproducer) or an error
+         
+         link to a bash script
+         link to a testmodule
+         link to testmodule and needles
+         
+    _Description_:
+
+         -  The tester sends the reproducer.
+            The system saves the reproducer somewhere and returns a link.
+
+
 
 # What does teaster do for you?
 1. accept requests to create the couple (runtime environment, provisioning environment) and publish that one somewhere
