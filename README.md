@@ -152,7 +152,7 @@ In the second one (b) we use an automation envinronment to test our bugs.
 
     _Input_: 
 
-         - (container id, prov env) e.g. (docker, sle12sp3)
+         - (consumer id, prov env) e.g. (docker, sle12sp3)
 
     _Output_: 
 
