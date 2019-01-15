@@ -99,7 +99,7 @@ In the second one (b) we use an automation envinronment to test our bugs.
  
     _Actors_:
 
-         - A consumer: it want to inform the system about its presence and capabilities. 
+         - A consumer: it wants to inform the system about its presence and capabilities. 
                        A consumer is able to handle only a runtime env and only a product
 
     _Input_: 
@@ -120,11 +120,11 @@ In the second one (b) we use an automation envinronment to test our bugs.
  
      _Actors_:
 
-         - Started by guy: He want to know if does exist a consumer is able to handle (run env, product) for a prov env.
+         - Started by guy: He wants to know if does exist a consumer able to handle (run env, product) for a prov env.
          - Tester        : same above.
  
          A consumer can handle only one run env and only one product.
-         prov env are the packages to test.
+         A prov env are the packages to test.
 
     _Input_: 
 
@@ -136,33 +136,42 @@ In the second one (b) we use an automation envinronment to test our bugs.
 
     _Description_:
 
-         -  Request to search for a consumer that is able to create a couple for a particular product
+         -  Search for a consumer that is able to create a couple for a particular product
             and a particular run env.
-         - The system responds with a consumer id in case of success or some sort of error.
+         -  The system responds with a consumer id in case of success or some sort of error.
 
-- **Request for a couple** (uc#2)
+- **Create a couple** (uc#2)
 
  
      _Actors_:
 
-         - Started by guy: He want to create the couple (run env, prov env) for a new update in the queue.
-         - Tester        : He want to create the couple (run env, prov env) to investigate about something.
+         - Started by guy: He wants to create the couple (run env, prov env) for a new update in the queue.
+         - Tester        : He wants to create the couple (run env, prov env) to investigate about something.
+         - A consumer    : It knows how to handle that particular run env and product. It contacts the builder.
+         - A builder     : It creates the run env
 
-         The actors must know the consumer id obatained from uc#1. 
+         The first 2 actors must know the consumer id obatained from uc#1. 
 
     _Input_: 
 
-         - (consumer id, prov env) e.g. (docker, sle12sp3)
+         - (consumer id, prov env) e.g. (1234, [a.x.y.z])
 
     _Output_: 
 
-         - a consumer id or an error. 
+         - An url poiting to (run env, prov env). 
+         
+            A registry url:
+            hashicorp/precise64
+            opensuse/tumbleweed 
 
     _Description_:
 
-         -  Request to search for a consumer that is able to create a couple for a particular product
-            and a particular run env.
-         - The system responds with a consumer id in case of success or some sort of error.
+         -  The first 2 actors submit the request to the consumer, using the correct id.
+            The consumer creates or modifies the source (Dockerfile, Vagranfile) for provisioning. 
+            Then the consumer forwards the modified source to the builder (destionation).
+            The builder builds (run env, prov env) 
+            
+            (Note) the building process will be an asynchronous process so we need some sort of notification.
 
 
 - uc#3
