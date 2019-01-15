@@ -166,7 +166,7 @@ In the second one (b) we use an automation envinronment to test our bugs.
          -  The reproduer id will be used to forward the triple creation request (run env, prov env, reproducer)
             to the correct consumer. See above uc#1 to search for the correct consumer for a run env and a product 
 
-**Create a triple** (uc#3)
+- **Create a triple** (uc#3)
 
      In this case the reproducer already exists. We got an id from #uc2.
      
