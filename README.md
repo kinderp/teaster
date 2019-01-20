@@ -120,7 +120,8 @@ In the second one (b) we use an automation envinronment to test our bugs.
  
      _Actors_:
 
-         - Started by guy: He wants to know if does exist a consumer able to handle (run env, product) for a prov env.
+         - Started by guy: He wants to know if does exist a consumer able to handle (run env, product) 
+                           for a prov env.
          - Tester        : same above.
  
          A consumer can handle only one run env and only one product.
@@ -163,8 +164,9 @@ In the second one (b) we use an automation envinronment to test our bugs.
 
          -  Search for a reproducer
          -  The system responds with a reproducer id and a link to view the reproducer or an error.
-         -  The reproduer id will be used to forward the triple creation request (run env, prov env, reproducer)
-            to the correct consumer. See above uc#1 to search for the correct consumer for a run env and a product 
+         -  The reproduer id will be used to forward the triple creation request 
+            (run env, prov env, reproducer) to the correct consumer. 
+            See above uc#1 to search for the correct consumer for a run env and a product 
 
 - **Create a triple** (uc#3)
 
@@ -172,9 +174,12 @@ In the second one (b) we use an automation envinronment to test our bugs.
      
      _Actors_:
 
-         - Started by guy: He wants to create the triple (run env, prov env, reproducer) for a new update in the queue.
-         - Tester        : He wants to create the couple (run env, prov env, reproducer) to investigate about something.
-         - A consumer    : It knows how to handle that particular run env and product. It contacts the builder.
+         - Started by guy: He wants to create the triple 
+                           (run env, prov env, reproducer) for a new update in the queue.
+         - Tester        : He wants to create the couple 
+                           (run env, prov env, reproducer) to investigate about something.
+         - A consumer    : It knows how to handle that particular run env and product. 
+                           It contacts the builder.
          - A builder     : It creates the triple: an automation env
 
          The first 2 actors must know:
@@ -196,11 +201,12 @@ In the second one (b) we use an automation envinronment to test our bugs.
     _Description_:
 
          -  The first 2 actors submit the request to the consumer, using the correct id.
-            The consumer creates or modifies the source (Dockerfile, Vagranfile) for provisioning of the testing packages and reproducer. 
+            The consumer creates or modifies the source (Dockerfile, Vagranfile) for 
+            provisioning of the testing packages and reproducer. 
             Then the consumer forwards the modified source to the builder (destionation).
             The builder builds (run env, prov env, reproducer) 
             
-            (Note) the building process will be an asynchronous process so we need some sort of notification.
+      (Note) the building process will be an asynchronous process so we need some sort of notification.
 
 
 
@@ -210,9 +216,12 @@ In the second one (b) we use an automation envinronment to test our bugs.
     
      _Actors_:
 
-         - Started by guy: He wants to create the couple (run env, prov env) for a new update in the queue.
-         - Tester        : He wants to create the couple (run env, prov env) to investigate about something.
-         - A consumer    : It knows how to handle that particular run env and product. It contacts the builder.
+         - Started by guy: He wants to create the couple 
+                           (run env, prov env) for a new update in the queue.
+         - Tester        : He wants to create the couple 
+                           (run env, prov env) to investigate about something.
+         - A consumer    : It knows how to handle that particular run env and product. 
+                           It contacts the builder.
          - A builder     : It creates the run env.
 
          The first 2 actors must know:
@@ -233,11 +242,12 @@ In the second one (b) we use an automation envinronment to test our bugs.
     _Description_:
 
          -  The first 2 actors submit the request to the consumer, using the correct id.
-            The consumer creates or modifies the source (Dockerfile, Vagranfile) for provisioning of testing packages. 
+            The consumer creates or modifies the source (Dockerfile, Vagranfile) 
+            for provisioning of testing packages. 
             Then the consumer forwards the modified source to the builder (destionation).
             The builder builds (run env, prov env) 
             
-            (Note) the building process will be an asynchronous process so we need some sort of notification.
+      (Note) the building process will be an asynchronous process so we need some sort of notification.
 
 
 - **Share a reproducer** (uc#5)
