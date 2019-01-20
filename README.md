@@ -264,6 +264,48 @@ In the second one (b) we use an automation envinronment to test our bugs.
          -  The tester sends the reproducer.
             The system saves the reproducer somewhere and returns a link.
 
+# Class analysis
+
+Some notes about classes and patterns
+
+## Class analysis for run time source creation
+
+We'll use a [Factory Method](https://en.wikipedia.org/wiki/Factory_method_pattern) to instance the concrete RuntimeSource
+
+RuntimeSource: it represents all the infos needed to feed Dockerfile or Vagrantfile templates.
+               it is an abstract class and defines the interface for all the concrete RuntimeSource objects RuntimeSourceDocker,RuntimeSourceVagrant
+               we'll use jinja2 for templating.
+
+RuntimeSourceDocker: it is a concrete class. it implements RuntimeSource's interface. (it represents a Dockerfile)
+
+RuntimeSourceVagrant: it is a concrete class. it implements RuntimeSource's interface. (it represents a Vagranfile)
+
+------------------------
+
+RuntimeSourceTemplate: it is an abstract class.
+                       it defines the interface for the templates object instances: RuntimeSourceTemplateDocker, RuntimeSourceTemplateVagrant
+
+RuntimeSourceTemplateDocker: 
+
+RuntimeSourceTemplateVagrant:
+
+--------------------------
+
+RuntimeSourceCreator: it declares the factory method that creates a RuntimeSource object
+
+
+RuntimeSourceCreator: it defines the interface for the concrete runtime creator objects: 
+
+RuntimeSourceCreatorDocker: concrete creator for RuntimeSourceDocker objects, it overrides the RuntimeSourceCreator's factory method to create a concrete RuntimeSourceDocker instance.
+
+RuntimeSourceCreatorVagrant: concrete creator for RuntimeSourceVagrant objects, it overrides the RuntimeSourceCreator's factory method to create a concrete RuntimeSourceVagrant instance.
+
+-----------------------------
+
+* Product: RuntimeSource
+* ConcreteProduct: RuntimeSourceDocker, RuntimeSourceVagrant
+* Crator: RuntimeSourceCreator
+* ConcreteCreator : RuntimeSourceCreatorDocker, RuntimeSourceCreatorVagrant
 
 
 # What does teaster do for you?
