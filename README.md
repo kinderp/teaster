@@ -309,17 +309,23 @@ We'll use a [Factory Method](https://en.wikipedia.org/wiki/Factory_method_patter
       RuntimeSourceCreator: it defines the interface for the concrete runtime creator objects: 
 
       RuntimeSourceCreatorDocker: concrete creator for RuntimeSourceDocker objects
-                                  it overrides the RuntimeSourceCreator's factory method to create a concrete RuntimeSourceDocker instance.
+                                  it overrides the RuntimeSourceCreator's factory method.
+                                  it to create a concrete RuntimeSourceDocker instance.
 
-      RuntimeSourceCreatorVagrant: concrete creator for RuntimeSourceVagrant objects, it overrides the RuntimeSourceCreator's factory method to create a concrete RuntimeSourceVagrant instance.
+      RuntimeSourceCreatorVagrant: concrete creator for RuntimeSourceVagrant objects.
+                                   it overrides the RuntimeSourceCreator's factory method 
+                                   it creates a concrete RuntimeSourceVagrant instance.
 
 -----------------------------
+
+Factory Method's actors
 
 * Product: RuntimeSource
 * ConcreteProduct: RuntimeSourceDocker, RuntimeSourceVagrant
 * Crator: RuntimeSourceCreator
 * ConcreteCreator : RuntimeSourceCreatorDocker, RuntimeSourceCreatorVagrant
 
+------------------------------
 
 # What does teaster do for you?
 1. accept requests to create the couple (runtime environment, provisioning environment) and publish that one somewhere
