@@ -4,7 +4,7 @@ class RuntimeSource:
     __metaclass__ = ABCMeta
     
     @abstractmethod
-    def print(self):
+    def show(self):
         pass
 
 

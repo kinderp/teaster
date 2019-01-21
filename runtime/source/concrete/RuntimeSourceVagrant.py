@@ -2,5 +2,5 @@ from ..factory.RuntimeSource import RuntimeSource
 
 class RuntimeSourceVagrant(RuntimeSource):
     
-    def print(self):
+    def show(self):
         pass
