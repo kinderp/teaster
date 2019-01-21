@@ -7,4 +7,4 @@ class RuntimeSourceCreatorVagrant(RuntimeSourceCreator):
         pass
 
     def create(self):
-        ruturn RuntimeSourceVagrant()
+        return RuntimeSourceVagrant()
