@@ -280,6 +280,10 @@ Some notes about classes and patterns
 
 ## Class analysis for run time source creation
 
+1. We'll use a [Factory Method](https://en.wikipedia.org/wiki/Factory_method_pattern) to instance the concrete RuntimeSource
+2. We'll use a [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) to create a RuntimeeSourceFeed concrete object from json data requests. In this way, we put all the creation logic into the adapter and we are free to change the internal interface holding the external one (flask reuqest) always the same.
+
+
       RuntimeSourceFeed: 
       
             it represents all the infos needed to feed Dockerfile or Vagrantfile templates.
@@ -293,9 +297,6 @@ Some notes about classes and patterns
       RuntimeSourceFeedVagrant: it is a concrete class.
                                 it contains all the data needed to fill a Vagrantfile Template
                             
-
-1. We'll use a [Factory Method](https://en.wikipedia.org/wiki/Factory_method_pattern) to instance the concrete RuntimeSource
-2. We'll use a [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) to create a RuntimeeSourceFeed concrete object from json data requests. In this way, we put all the creation logic into the adapter and we are free to change the internal interface holding the external one (flask reuqest) always the same.
 
       RuntimeSource: 
       
