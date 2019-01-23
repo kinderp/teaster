@@ -284,7 +284,7 @@ Some notes about classes and patterns
       
             it represents all the infos needed to feed Dockerfile or Vagrantfile templates.
             it is an abstract class and defines the interface for all the concrete RuntimeSourceFeed objects
-            RuntimeSourceDocker,RuntimeSourceVagrant
+            RuntimeSourceFeedDocker,RuntimeSourceFeedVagrant
 
       RuntimeSourceFeedDocker: it is a concrete class. 
                                it contains all the data needed to fill a Dockerfile Template
@@ -299,6 +299,7 @@ We'll use a [Factory Method](https://en.wikipedia.org/wiki/Factory_method_patter
       
             it is an abstract class and defines the interface for all the concrete RuntimeSource objects
             RuntimeSourceDocker,RuntimeSourceVagrant
+            
             A runtime source concrete object is created by a RuntimeSourceCreator factory object from:
             1. A RuntimeSourceTemplate concrete object (template)
             2. A RuntimeSourceFeed concrete object     (data filling the gaps)
