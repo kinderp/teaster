@@ -284,39 +284,40 @@ Some notes about classes and patterns
 2. We'll use a [Adapter](https://en.wikipedia.org/wiki/Adapter_pattern) to create a RuntimeeSourceFeed concrete object from json data requests. In this way, we put all the creation logic into the adapter and we are free to change the internal interface holding the external one (flask reuqest) always the same.
 
 
-      RuntimeSourceFeed: 
-      
-            it represents all the infos needed to feed Dockerfile or Vagrantfile templates.
-            it is an abstract class and defines the interface for all the concrete RuntimeSourceFeed objects
-            RuntimeSourceFeedDocker,RuntimeSourceFeedVagrant
 
-      RuntimeSourceFeedDocker: it is a concrete class. 
-                               it contains all the data needed to fill a Dockerfile Template
+         RuntimeSourceFeed: 
 
+               it represents all the infos needed to feed Dockerfile or Vagrantfile templates.
+               it is an abstract class and defines the interface for all the concrete RuntimeSourceFeed objects
+               RuntimeSourceFeedDocker,RuntimeSourceFeedVagrant
 
-      RuntimeSourceFeedVagrant: it is a concrete class.
-                                it contains all the data needed to fill a Vagrantfile Template
-                            
-
-      RuntimeSource: 
-      
-            it is an abstract class and defines the interface for all the concrete RuntimeSource objects
-            RuntimeSourceDocker,RuntimeSourceVagrant
-            
-            A runtime source concrete object is created by a RuntimeSourceCreator factory object from:
-            1. A RuntimeSourceTemplate concrete object (template)
-            2. A RuntimeSourceFeed concrete object     (data filling the gaps)
-            We'll use jinja2 for templating.
+         RuntimeSourceFeedDocker: it is a concrete class. 
+                                  it contains all the data needed to fill a Dockerfile Template
 
 
-      RuntimeSourceDocker: it is a concrete class. 
-                           it implements RuntimeSource's interface. 
-                           it represents a Dockerfile
+         RuntimeSourceFeedVagrant: it is a concrete class.
+                                   it contains all the data needed to fill a Vagrantfile Template
 
 
-      RuntimeSourceVagrant: it is a concrete class. 
-                            it implements RuntimeSource's interface. 
-                            it represents a Vagranfile
+         RuntimeSource: 
+
+               it is an abstract class and defines the interface for all the concrete RuntimeSource objects
+               RuntimeSourceDocker,RuntimeSourceVagrant
+
+               A runtime source concrete object is created by a RuntimeSourceCreator factory object from:
+               1. A RuntimeSourceTemplate concrete object (template)
+               2. A RuntimeSourceFeed concrete object     (data filling the gaps)
+               We'll use jinja2 for templating.
+
+
+         RuntimeSourceDocker: it is a concrete class. 
+                              it implements RuntimeSource's interface. 
+                              it represents a Dockerfile
+
+
+         RuntimeSourceVagrant: it is a concrete class. 
+                               it implements RuntimeSource's interface. 
+                               it represents a Vagranfile
 
 ------------------------
 
