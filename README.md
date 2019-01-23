@@ -280,13 +280,28 @@ Some notes about classes and patterns
 
 ## Class analysis for run time source creation
 
+      RuntimeSourceFeed: 
+      
+            it represents all the infos needed to feed Dockerfile or Vagrantfile templates.
+            it is an abstract class and defines the interface for all the concrete RuntimeSourceFeed objects
+            RuntimeSourceDocker,RuntimeSourceVagrant
+
+      RuntimeSourceFeedDocker: it is a concrete class. 
+                               it contains all the data needed to fill a Dockerfile Template
+
+
+      RuntimeSourceFeedVagrant: it is a concrete class.
+                                it contains all the data needed to fill a Vagrantfile Template
+                            
 We'll use a [Factory Method](https://en.wikipedia.org/wiki/Factory_method_pattern) to instance the concrete RuntimeSource
 
       RuntimeSource: 
       
-            it represents all the infos needed to feed Dockerfile or Vagrantfile templates.
             it is an abstract class and defines the interface for all the concrete RuntimeSource objects
             RuntimeSourceDocker,RuntimeSourceVagrant
+            A runtime source concrete object is created by a RuntimeSourceCreator factory object from:
+            1. A RuntimeSourceTemplate concrete object (template)
+            2. A RuntimeSourceFeed concrete object     (data filling the gaps)
             We'll use jinja2 for templating.
 
 
@@ -314,6 +329,9 @@ We'll use a [Factory Method](https://en.wikipedia.org/wiki/Factory_method_patter
 
 
       RuntimeSourceCreator: it declares the factory method that creates a RuntimeSource object
+                            In order to create a RuntimeSourceObject it needs:
+                            1. A RuntimeSourceTemplate concrete object (template)
+                            2. A RuntimeSourceFeed concrete object     (data filling the gaps)
 
 
       RuntimeSourceCreator: it defines the interface for the concrete runtime creator objects: 
