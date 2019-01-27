@@ -1,11 +1,12 @@
 from abc import ABCMeta, abstractproperty
 
-class RuntimeSourceTemplate:
+class Field:
     __metaclass__ = ABCMeta
 
+    def __init__(self):
+        self.__description = None
+
     @abstractproperty
-    def template(self):
+    def description(self):
         pass
-
-
 

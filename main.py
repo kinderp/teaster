@@ -2,6 +2,8 @@ from flask import Flask
 from flask import request
 import json
 
+from adapter.concrete import AdapterDocker
+
 app = Flask(__name__)
 
 """
@@ -16,6 +18,15 @@ def hello():
     data = json.loads(request.data.decode('utf-8'))
     print(data)
     return "Hello World!"
+
+@app.route("/delete_me", methods=['POST'])
+def hello():
+    data = json.loads(request.data.decode('utf-8'))
+    print(data)
+
+    runtime_soucre = AdaperDocker(data).create()
+    return "Hello World!"
+
 
 if __name__ == '__main__':
 
