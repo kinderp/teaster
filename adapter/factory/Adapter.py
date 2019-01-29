@@ -6,7 +6,7 @@ from runtime.template import TemplateLoader
 class Adapter:
     __metaclass__ = ABCMeta
 
-    def __init__(self, **adaptee):
+    def __init__(self, adaptee):
         self.__adaptee = adaptee
         self.__cloader = CreatorLoader()
         self.__floader = FeedLoader()
@@ -23,10 +23,6 @@ class Adapter:
     @property
     def floader(self):
         return self.__floader
-
-    @property
-    def tloader(self):
-        return self.__tloader
 
     @property
     def tloader(self):

@@ -13,6 +13,6 @@ class FeedLoader:
                             lambda m: isclass(m) and not isabstract(m))
 
         for name, _class in classes:
-            if issubclass(_class, RuntimeSourceCreator):
+            if issubclass(_class, RuntimeSourceFeed):
                 return _class()
 
