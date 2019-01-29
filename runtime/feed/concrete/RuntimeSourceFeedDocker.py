@@ -5,6 +5,7 @@ from runtime.template.datatype.docker import Env
 from runtime.template.datatype.docker import Copy
 from runtime.template.datatype.docker import Run
 from runtime.template.datatype.docker import Cmd
+from runtime.template.datatype.docker import Workdir
 
 class RuntimeSourceFeedDocker(RuntimeSourceFeed):
 
@@ -14,6 +15,7 @@ class RuntimeSourceFeedDocker(RuntimeSourceFeed):
         self.__copy = None
         self.__run = None
         self.__cmd = None
+        self.__workdir = None
 
     @property
     def image(self):
@@ -55,6 +57,14 @@ class RuntimeSourceFeedDocker(RuntimeSourceFeed):
     def cmd(self, cmd):
         self.__cmd = cmd
 
+    @property
+    def workdir(self):
+        return self.__workdir
+
+    @workdir.setter
+    def workdir(self, workdir):
+        self.__workdir = workdir
+
     def parse(self, raw):
         print(kwargs)
 
@@ -64,12 +74,14 @@ class RuntimeSourceFeedDocker(RuntimeSourceFeed):
         self.copy = Copy(raw["copy"]["from"],raw["copy"]["to"])
         self.run = Run(raw["run"])
         self.cmd = Cmd(raw["cmd"])
-        
+        self.workdir = Workdir(raw["workdir"]) 
+
     def to_dict(self):
         return {
             "image": self.__image,
             "env": self.__env,
             "copy": self.__copy,
             "run": self.__run,
-            "cmd": self.__cmd
+            "cmd": self.__cmd,
+            "workdir": self.__workdir
         }
