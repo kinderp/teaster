@@ -22,4 +22,4 @@ class AdapterDocker(Adapter):
         docker_creator = self.cloader.load_factory('Docker')
         docker_source = docker_creator.create(docker_feed, docker_template)
         print(docker_source.show())
-
+        return docker_source.source
