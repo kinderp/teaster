@@ -26,7 +26,24 @@ services:
       dockerfile: Dockerfile_teaster
     volumes:
         - /mnt/teaster:/mynode/data
+  producer:
+    container_name: producer
+    networks:
+        - teaster_net
+    image: producer
+    build:
+      context: .
+      dockerfile: Dockerfile_producer
 
+  consumer:
+    container_name: consumer
+    networks:
+        - teaster_net
+    image: consumer
+    build:
+      context: .
+      dockerfile: Dockerfile_consumer
+ 
 
 networks:
   teaster_net:
