@@ -28,31 +28,13 @@ class Rabbit:
         self.exchange()
         self.queue()
 
-#    @property
-#    def connection(self):
-#        return self.__connection
-#
-#    @connection.setter
-#    def connection(self, connection):
-#        self.__connection = connection
-#
     @property
     def host(self):
         return self.__host
-#
-#    @host.setter
-#    def host(self, host):
-#        self.__host = host
-#
+
     @property
     def vhost(self):
         return self.__vhost
-#
-#    @vhost.setter
-#    def vhost(self, vhost):
-#        self.__vhost = vhost
-#
-
 
     @property
     def channel(self):
@@ -98,29 +80,6 @@ class Rabbit:
     def consume(self, callback):
         pass
 
-#    def publish(self, body):
-#        if self.__channel:
-#            self.__channel.basic_publish(exchange=self.__exchange,
-#                                         routing_key=self.__routing,
-#                                         body=body,
-#                                         properties=pika.BasicProperties(
-#                                            delivery_mode=delivery_mode,  # make message persistent
-#                                         ))
-#
-#    def consume(self, callback):
-#        """
-#        :param channel: il canale verso il server 
-#        :param callback: la funzione che gestisce il messaggio in input
-#        :param queue: il nome della coda da cui leggere
-#        :param ack: se il server si aspetta un ack prima di scartare il messaggio
-#        :return: 
-#        """
-#        self.__channel.basic_consume(callback,
-#                                     queue=self.__queue,
-#                                     no_ack=no_ack)
-#        print(' [*] Waiting for messages. To exit press CTRL+C')
-#        self.__channel.start_consuming()
-#
     def ack(self, delivery_tag, multiple=True):
         if self.__channel:
             self.__channel.basic_ack(delivery_tag, multiple=multiple)

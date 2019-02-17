@@ -8,7 +8,6 @@ class Consumer(Rabbit):
 
 
     def consume(self, callback):
-        print("prova-----------------------------")
         self.channel.basic_consume(callback,
                                      queue=self.queue_name,
                                      no_ack=no_ack)
