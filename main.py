@@ -20,7 +20,7 @@ def hello():
     return "Hello World!"
 
 @app.route("/delete_me", methods=['POST'])
-def hello():
+def delete_me():
     data = json.loads(request.data.decode('utf-8'))
     print(data)
 
