@@ -17,6 +17,6 @@ class Consumer(Rabbit):
 
     def callback(self, channel, method, properties, body):
         print(" [x] Received %r" % body)
-        channel.basic_ack(delivery_tag=method.delivery_tag)
-
+        #channel.basic_ack(delivery_tag=method.delivery_tag)
+        self.ack(delivery_tag=method.delivery_tag)
 
