@@ -1,4 +1,4 @@
-# rabbit connectoin settings
+# rabbit connection settings
 host_rabbit = 'localhost'
 vhost = None
 queue = 'test'
@@ -8,15 +8,6 @@ routing = queue
 wait_for_rabbit = False
 wait_for_teaster = False
 
-#        conn_details = {
-#            "host" :'rabbit',
-#            "vhost" : None,
-#            "queue" : data['cid'],
-#            "exchange" : 'test',
-#            "exchange_type" : 'direct',
-#            "routing" : data['cid']
-#        }
-#
-
+# teaster connection settings
 host_teaster = 'localhost'
 
