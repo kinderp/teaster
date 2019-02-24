@@ -43,7 +43,6 @@ class Consumer(Rabbit):
         
         print(" [Consumer] registering a consumer to teaster {}".format(host_teaster))
         r = post('http://{}:5000/consumers'.format(host_teaster), data={"runenv": runenv, "product": product})
-        #r = post('http://localhost:5000/consumers', data={"runenv": runenv, "product": product})
         print(" [Consumer] response registration \n{}".format(r.text))
         return r.json()
         
