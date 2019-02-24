@@ -10,6 +10,7 @@ services:
     container_name: rabbit
     ports:
         - "15672:15672"
+        - "5672:5672"
     networks:
         - teaster_net
     image: rabbitmq:3.6-management
@@ -25,15 +26,22 @@ services:
       context: .
       dockerfile: Dockerfile_teaster
     volumes:
-        - /mnt/teaster:/mynode/data
-  producer:
-    container_name: producer
-    networks:
-        - teaster_net
-    image: producer
-    build:
-      context: .
-      dockerfile: Dockerfile_producer
+        - ~/dev/teaster:/myapp
+    ports:
+        - "5000:5000"
+
+  #  producer:
+  #    container_name: producer
+  #    networks:
+  #        - teaster_net
+  #    image: producer
+  #    build:
+  #      context: .
+  #      dockerfile: Dockerfile_producer
+  #    volumes:
+  #        - ~/dev/teaster:/myapp
+  #    
+  #
 
   consumer:
     container_name: consumer
@@ -43,6 +51,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_consumer
+    volumes:
+        - ~/dev/teaster:/myapp
  
 
 networks:

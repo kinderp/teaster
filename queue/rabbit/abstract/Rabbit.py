@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 import pika
+import time
 
 from ..Settings import no_ack
 from ..Settings import delivery_mode
@@ -8,10 +9,9 @@ from ..Settings import durable_queue
 class Rabbit:
     __metaclass__ = ABCMeta
     
-    def __init__(self,host="localhost", vhost=None, queue=None, exchange='', exchange_type='direct', routing=''):
+    def __init__(self,host="localhost", vhost=None, queue=None, exchange='', exchange_type='direct', routing='', wait_for_rabbit=False):
         self.__connection = None
         self.__channel = None
-
 
         self.__no_ack = no_ack
         self.__delivery_mode = delivery_mode
@@ -24,6 +24,7 @@ class Rabbit:
         self.__exchange_type = exchange_type
         self.__routing_key = routing
 
+        if wait_for_rabbit: self.wait_until_up_and_running()
         self.connect()
         self.exchange()
         self.queue()
@@ -91,4 +92,39 @@ class Rabbit:
     def check_connection(self):
         if self.__connection:
             return self.__connection.is_open
+
+    def sleep(self, sec):
+        self.__connection.sleep(sec)
+
+    def wait_until_up_and_running(self):
+        conn_details = {
+                "host" : self.__host, 
+                "vhost" : self.__vhost,
+                "queue" : self.__queue_name, 
+                "exchange" : self.__exchange_name, 
+                "exchange_type" : self.__exchange_type, 
+                "routing" : self.__routing_key
+        }
+
+
+        while(True):
+            try:
+
+                if conn_details['vhost'] is None:
+                    connection = pika.BlockingConnection(pika.ConnectionParameters(conn_details['host']))
+                else:
+                    connection = pika.BlockingConnection(pika.ConnectionParameters(host=conn_details['host'],virtual_host=conn_details['vhost']))
+
+                if connection.is_open:
+                    print('OK, rabbitmq is ready. Closing this connection and starting consumer!')
+                    connection.close()
+                    break
+                else:
+                    print("wait until rabbimq is up and running...")
+                    time.sleep(5)
+                    #self.sleep(5)
+
+            except Exception as error:
+                print("wait until rabbimq is up and running...")
+                time.sleep(5)
 

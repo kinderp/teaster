@@ -1,8 +1,8 @@
 FROM python:2.7-slim
 
-ADD . ./myapp
+ADD . /myapp
 
-WORKDIR ./myapp
+WORKDIR /myapp
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc python-dev \
