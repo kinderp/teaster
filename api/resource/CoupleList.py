@@ -16,15 +16,6 @@ class CoupleList(Resource):
         data = CoupleList.parser.parse_args()
         print("[CoupleList:post] arrived data: \n{}".format(json.dumps(data,indent=4, sort_keys=True)))
         
-        #conn_details = {
-        #    "host" :host_rabbit,
-        #    "vhost" : vhost,
-        #    "queue" : queue,
-        #    "exchange" : exchange,
-        #    "exchange_type" : exchange_type,
-        #    "routing" : routing
-        #}
-
         conn_details = {
             "host" : host_rabbit,
             "vhost" : vhost,
@@ -34,9 +25,6 @@ class CoupleList(Resource):
             "routing" : data['cid'],
             "wait_for_rabbit": wait_for_rabbit
         }
-
-        #import pdb
-        #pdb.stack_trace()
 
         print("[CoupleList:post] producer, connecting to rabbit: \n{}".format(json.dumps(conn_details,indent=4, sort_keys=True)))
         p = Producer(**conn_details)
