@@ -7,6 +7,8 @@ from runtime.template.datatype.docker import Run
 from runtime.template.datatype.docker import Cmd
 from runtime.template.datatype.docker import Workdir
 
+from settings import docker_build_dir
+
 class RuntimeSourceFeedDocker(RuntimeSourceFeed):
 
     def __init__(self):
@@ -16,6 +18,7 @@ class RuntimeSourceFeedDocker(RuntimeSourceFeed):
         self.__run = None
         self.__cmd = None
         self.__workdir = None
+        self.__yourtag = None
 
     @property
     def image(self):
@@ -65,8 +68,68 @@ class RuntimeSourceFeedDocker(RuntimeSourceFeed):
     def workdir(self, workdir):
         self.__workdir = workdir
 
+    @property
+    def yourtag(self):
+        return self.__yourtag
+
+    @yourtag.setter    
+    def yourtag(self, yourtag):
+        self.__yourtag = yourtag
+
     def parse(self, raw):
-        print(kwargs)
+        id_ = raw["id"]
+        #provenv = raw["provenv"]
+        #image_name = raw["image"]["name"]
+        #image_tag = raw["image"]["tag"]
+        #your_tag = raw["yourtag"]
+
+        # check if a reproducer
+        reproducer = False
+        repo = None
+        command = None
+        if "reproducer" in raw:
+            repo = raw["reproducer"]["repo"]
+            command = raw["reproducer"]["command"]
+            reproducer = True
+        # Note: the reproducer context is a git repo, during the build phase
+        #       that repo will be cloned (using id_ as the new cloned dir) into
+        #       the docker_build_dir (see settings/Settings.py)
+
+        workdir = '/workdir'
+        source = {}
+        source["image"] = raw["image"]
+        source["workdir"] = workdir
+
+        if reproducer:
+            source["copy"] = {}
+            source["copy"]["from"] = "{}/{}".format(docker_build_dir, id_)
+            source["copy"]["to"] = workdir
+
+            source["cmd"] = command
+
+        source["run"] = raw["provenv"]
+        source["yourtag"] = raw["yourtag"]
+        source["env"] = {}
+        #        source = {
+        #            "image": {
+        #            "name": image_name,
+        #            "tag": image_tag
+        #        },
+        #        "env": {
+        #
+        #        },
+        #        "workdir":"/workdir",
+        #        "copy": {
+        #            "from": "{}/{}".format(docker_build_dir, id_),
+        #            "to": "/workdir"
+        #        },
+        #        "run":provenv,
+        #        "cmd": "echo Hello world!",
+        #        "yourtag": your_tag
+        #        }
+
+
+        self.parse_low(source)
 
     def parse_low(self, raw):
         self.image = Image(raw["image"]["name"], raw["image"]["tag"])
@@ -74,7 +137,8 @@ class RuntimeSourceFeedDocker(RuntimeSourceFeed):
         self.copy = Copy(raw["copy"]["from"],raw["copy"]["to"])
         self.run = Run(raw["run"])
         self.cmd = Cmd(raw["cmd"])
-        self.workdir = Workdir(raw["workdir"]) 
+        self.workdir = Workdir(raw["workdir"])
+        self.yourtag = raw["yourtag"]
 
     def to_dict(self):
         return {
@@ -83,5 +147,6 @@ class RuntimeSourceFeedDocker(RuntimeSourceFeed):
             "copy": self.__copy,
             "run": self.__run,
             "cmd": self.__cmd,
-            "workdir": self.__workdir
+            "workdir": self.__workdir,
+            "yourtag": self.__yourtag
         }

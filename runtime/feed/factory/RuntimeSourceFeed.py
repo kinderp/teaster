@@ -4,7 +4,7 @@ class RuntimeSourceFeed:
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def parse(self, **kwargs):
+    def parse(self, kwargs):
         pass
 
     @abstractmethod
