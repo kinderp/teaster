@@ -89,7 +89,8 @@ class RuntimeSourceFeedDocker(RuntimeSourceFeed):
         command = None
         if "reproducer" in raw:
             repo = raw["reproducer"]["repo"]
-            command = raw["reproducer"]["command"]
+            if "command" in raw["reproducer"]: 
+                command = raw["reproducer"]["command"]
             reproducer = True
         # Note: the reproducer context is a git repo, during the build phase
         #       that repo will be cloned (using id_ as the new cloned dir) into
@@ -102,7 +103,8 @@ class RuntimeSourceFeedDocker(RuntimeSourceFeed):
 
         if reproducer:
             source["copy"] = {}
-            source["copy"]["from"] = "{}/{}".format(docker_build_dir, id_)
+            #source["copy"]["from"] = "{}/{}".format(docker_build_dir, id_)
+            source["copy"]["from"] = "."
             source["copy"]["to"] = workdir
 
             source["cmd"] = command

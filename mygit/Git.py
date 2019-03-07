@@ -6,6 +6,17 @@ import os
 from settings import root_dir, docker_build_dir
 
 class Git:
+
+    def check_if_a_branch_exist(self, repo_dir, branch):
+        repo = Repo('{}/{}'.format(docker_build_dir, repo_dir))
+        import pdb
+        pdb.set_trace()
+        info = repo.remotes.origin.fetch()
+        for elem in info:
+            if elem.name == '{}/{}'.format(repo.remotes.origin.name, branch): return True
+            
+        return False
+
     def clone(self, url_repo, destination_dir):
         repo = Repo(root_dir)
         
@@ -39,3 +50,7 @@ class Git:
         git.checkout('HEAD', b=branch_name)         # create a new aranch
         git.push('--set-upstream', repo.remotes.origin.name, branch_name)
 
+    def pull_branch(self, repo_dir, branch_name):
+        repo = Repo('{}/{}'.format(docker_build_dir, repo_dir))
+        git = repo.git
+        git.checkout('-b', branch_name, '{}/{}'.format(repo.remotes.origin.name, branch_name))
