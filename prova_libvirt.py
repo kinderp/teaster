@@ -1,4 +1,4 @@
-image_name = 'sled15.qcow2'
+image_name = 'test.qcow2'
 
 iso_path = '/home/antonio/SLE-15-Installer-DVD-x86_64-GM-DVD1.iso'
 
@@ -54,6 +54,7 @@ stgvol_xml = """
   <allocation>0</allocation>
   <capacity unit="G">10</capacity>
   <target>
+    <format type='qcow2'/>
     <path>/var/lib/virt/images/{image_name}</path>
     <permissions>
       <owner>107</owner>
