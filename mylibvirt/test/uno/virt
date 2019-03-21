@@ -1,0 +1,1 @@
+virt-install --name prova --memory 2048 --disk size=10 --location http://download.opensuse.org/pub/opensuse/distribution/leap/42.3/repo/oss/
