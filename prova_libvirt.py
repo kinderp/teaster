@@ -1,4 +1,4 @@
-image_name = 'test.qcow2'
+image_name = 'sled15.qcow2'
 
 iso_path = '/home/antonio/SLE-15-Installer-DVD-x86_64-GM-DVD1.iso'
 
@@ -6,7 +6,7 @@ xml = """
 <domain type='kvm'>
   <name>demo</name>
   <uuid>c7a5fdbd-cdaf-9455-926a-d65c16db1809</uuid>
-  <memory>500000</memory>
+  <memory unit='KiB'>2097152</memory>
   <vcpu>1</vcpu>
   <os>
     <type arch='x86_64' machine='pc'>hvm</type>
@@ -21,7 +21,7 @@ xml = """
     <emulator>/usr/bin/qemu-kvm</emulator>
     <disk type='file' device='disk'>
       <source file='/var/lib/libvirt/images/{image_name}'/>
-      <driver name='qemu' type='raw'/>
+      <driver name='qemu' type='qcow2'/>
       <target dev='hda'/>
     </disk>
     <disk type='file' device='cdrom'>
@@ -67,7 +67,7 @@ stgvol_xml = """
 v = Volume(c.conn, 'default')
 v.list_volumes()
 
-new_volume = v.create_volume(stgvol_xml)
+#new_volume = v.create_volume(stgvol_xml)
 
 import pdb
 pdb.set_trace()
