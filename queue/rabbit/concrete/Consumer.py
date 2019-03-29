@@ -10,7 +10,18 @@ class Consumer(Rabbit):
     def publish(self, body):
         pass
 
-    def consume(self, callback):
+    def consume(self, your_callback=None):
+
+        def callback(channel, method, properties, body):
+            print(" [x] Received %r" % body)
+            #channel.basic_ack(delivery_tag=method.delivery_tag)
+            #self.ack(delivery_tag=method.delivery_tag)
+            #import pdb
+            #pdb.set_trace()
+            self.ack(delivery_tag=method.delivery_tag)
+            if your_callback: your_callback(body)
+            #self.ack(delivery_tag=method.delivery_tag)
+        
         self.channel.basic_consume(callback,
                                      queue=self.queue_name,
                                      no_ack=no_ack)
@@ -18,11 +29,7 @@ class Consumer(Rabbit):
         self.channel.start_consuming()
 
 
-    def callback(self, channel, method, properties, body):
-        print(" [x] Received %r" % body)
-        #channel.basic_ack(delivery_tag=method.delivery_tag)
-        self.ack(delivery_tag=method.delivery_tag)
-    
+
     @classmethod
     def register(cls, runenv, product, wait_for_teaster=False):
         

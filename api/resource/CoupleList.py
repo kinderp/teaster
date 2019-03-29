@@ -5,24 +5,22 @@ from settings import host_rabbit, vhost, queue, exchange, exchange_type, routing
  
 import json
 
+from flask import request
 
 class CoupleList(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument('provenv', required=True, help="A couple must specify the related provenv")
-    parser.add_argument('cid', required=True, help="A couple must specify the taget consumer")
     
     def post(self):
-       
-        data = CoupleList.parser.parse_args()
+      
+        data = request.get_json()
         print("[CoupleList:post] arrived data: \n{}".format(json.dumps(data,indent=4, sort_keys=True)))
         
         conn_details = {
             "host" : host_rabbit,
             "vhost" : vhost,
-            "queue" : data['cid'],
+            "queue" : data['id'],
             "exchange" : exchange,
             "exchange_type" : exchange_type,
-            "routing" : data['cid'],
+            "routing" : data['id'],
             "wait_for_rabbit": wait_for_rabbit
         }
 
