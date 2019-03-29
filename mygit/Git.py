@@ -9,8 +9,6 @@ class Git:
 
     def check_if_a_branch_exist(self, repo_dir, branch):
         repo = Repo('{}/{}'.format(docker_build_dir, repo_dir))
-        import pdb
-        pdb.set_trace()
         info = repo.remotes.origin.fetch()
         for elem in info:
             if elem.name == '{}/{}'.format(repo.remotes.origin.name, branch): return True

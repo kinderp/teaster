@@ -13,8 +13,6 @@ class ReceiverCreateBuildingContextDocker:
     def create(self):
         # clone repo into dest dir
         self.__git.clone(self.__url_repo, self.__destination_dir)
-        import pdb
-        pdb.set_trace()
         self.__create_new_branch()
         self.__write_dockerfile()
         self.__push_dockerfile()
