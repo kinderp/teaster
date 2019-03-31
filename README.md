@@ -470,8 +470,51 @@ i am a reproducer :)
 
 Your reproducer has been inserted on top of your runenv and now can be shared easily.
 
-Delete all yuor images
+Delete test_trople container and the associated image
 
+```
+(teaster) ➜  teaster git:(triple) ✗ docker rm test_triple
+test_triple
+```
+
+```
+teaster) ➜  teaster git:(triple) ✗ docker rmi $(docker images -qa)
+Untagged: registry.gitlab.com/caristia/antonio_suse/new_image:latest
+Untagged: registry.gitlab.com/caristia/antonio_suse/new_image@sha256:f7f13bc05cd6c39cbf1024f156e2fc4bdf8724e270b4afa59356cf8bb09f7b0c
+Deleted: sha256:634af52888bcab13c3a8626ec8006550a096be4cbe577a1698fe29d1e7e91d33
+Deleted: sha256:5e6c026602db588ad56499e002d618a8e570e51f17008fd7bf3d4fbb4d8c5b8f
+Deleted: sha256:fa2859d62cb8b4f5afe685383add59355abef3b7ad2684d8308ca120e4828119
+Deleted: sha256:8b3e40b03c3cf0e4d04ad92e29b83e69098e147e8a4db86dd20cfae767ffca05
+Deleted: sha256:caccaf2c751098c32780b66ef022a0e3f2f62177cbd31f5835d7f0d827c08026
+```
+
+```
+(teaster) ➜  teaster git:(triple) ✗ docker images|grep antonio_suse                                
+
+```
+
+pull and rerun your reproducer
+
+
+```
+(teaster) ➜  teaster git:(triple) ✗ docker pull registry.gitlab.com/caristia/antonio_suse/new_image 
+Using default tag: latest
+latest: Pulling from caristia/antonio_suse/new_image
+adec38add5d1: Already exists 
+935c6b6c3290: Already exists 
+d3f94c2bd985: Pull complete 
+bc5ba9e9ff9a: Pull complete 
+Digest: sha256:f7f13bc05cd6c39cbf1024f156e2fc4bdf8724e270b4afa59356cf8bb09f7b0c
+Status: Downloaded newer image for registry.gitlab.com/caristia/antonio_suse/new_image:latest
+
+```
+
+```
+(teaster) ➜  teaster git:(triple) ✗ docker run --name test_triple_other_tester registry.gitlab.com/caristia/antonio_suse/new_image:latest
+i am a reproducer :)
+```
+
+Good, we have a working reproducer and it can be shared easily. We are happy \o/ :)
 
 
 # Introduction
