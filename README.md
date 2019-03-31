@@ -197,7 +197,7 @@ Be sure to have docker up and running
 [2019-03-31 12:50:43,757: INFO/MainProcess] celery@linux-peu5 ready.
 ```
 
-### Create a cuuple (submit your first request)
+### Create a couple (submit your first request)
 
 1 create and a new github/gitlab project 
 
