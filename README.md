@@ -43,13 +43,13 @@ Please, follow the below instructions
 
 # Run and test the system
 
-:warning: teaster is just a POC and it is in the early stage of his hard life. Does not exist any validation for the input requests yet and unit tests cover just a little part of the entire codebase. So what teaster does well untill now is: it crashes :boom: and make you feel frustated :)
+:warning: teaster is just a POC and it is in the early stage of its hard life. Does not exist any validation for the input requests yet and unit tests cover just a little part of the entire codebase. So what teaster does well untill now is: it crashes :boom: and make you feel frustated :)
 
 ## Create a couple
 
 See all the steps below
 
-### Run input interface
+### Run a input interface
 
 ```
 (teaster) ➜  teaster git:(master) ✗ python main.py 
@@ -106,7 +106,7 @@ consumer, connecting to rabbit:
 
 ```
 
-As you can see below, what a consumer does:
+As you can see above, what a consumer does:
 
 1. it registers itself to the system
 
@@ -125,7 +125,7 @@ You can verify that a consumer now exists from:
 ```
 (teaster) ➜  teaster git:(master) ✗ sudo rabbitmqctl list_consumers -p /
 Listing consumers
-6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b	<rabbit@linux-peu5.2.540.0>	ctag1.5ad98e68d87a4dbf877b51d89b3dbb5a	true	0	[]
+6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b	<rabbit@linux-peu5.2.540.0>
 ```
 
 2. teaster side
@@ -186,7 +186,8 @@ It accepts building request for your celery tasks
 [2019-03-31 12:50:43,705: INFO/MainProcess] mingle: all alone
 [2019-03-31 12:50:43,757: INFO/MainProcess] celery@linux-peu5 ready.
 ```
-### Submit a request
+
+### Create a cuuple (submit your first request)
 
 1 create and a new github/gitlab project 
 
@@ -218,10 +219,10 @@ payload = {
 r = requests.post("http://localhost:5000/couples", json=payload)
 ```
 
-* id is the consumer'id you want to contact
-* provenv is a list of command to install your rpm (--non-ineteractive is important, teaster is not smart until now)
-* yourtag is the name of your image (it will be pushed in your docker registry) 
-* reproducer.repo is git url where teaster will commit a new Dockerfile for your runtime env
+* `id` is the consumer's id you want to reach out
+* `provenv` is a list of commands to install your rpms (`--non-ineteractive` is important, teaster is not smart enough)
+* `yourtag` is the name of your image (it will be pushed into your docker registry) 
+* `reproducer.repo` is the git url where teaster will commit a new Dockerfile for your runtime env
 
 ---------------------------
 
@@ -260,7 +261,7 @@ r = requests.post("http://localhost:5000/couples", json=payload)
 
 2. consumer output
 
-* it just dequeues the request and create a runtime source (a Dockerfile in this case)
+* it just dequeues the request and creates a runtime source (a Dockerfile in this case)
 * it sends a building request for this Dockerfile to the celery interface
 
 ```
@@ -358,7 +359,7 @@ CMD None
 ```
 
 The new image has been pushed on your personal registry so it's ready to be pulled from another machine
-In this case we just remove the image and pull to verify
+In this case we just remove the image and re-pull it to verify
 
 ```
 ➜  deleteme git:(opensuse) docker rmi $(docker images -qa)
@@ -433,7 +434,7 @@ To https://github.com/kinderp/deleteme.git
 Now that you have a reproducer you can submit a triple creation request and teaster will put your reproducer
 on top of your runtime env.
 
-create a request as below, be sure to use the correct consumer id and fill the reproducer.command field
+create a request as below, be sure to use the correct consumer id and fill the `reproducer.command` field
 with the correct name of your reproducer on github (teaster is not smart enough to add x permission until now)
 
 
@@ -458,7 +459,7 @@ r = requests.post("http://localhost:5000/triples", json=payload)
 You will see a very similar output to the previous couple request.
 Let's verify that all has gone fine.
 
-### Verify
+### Verify the result
 
 If you run your container this time without `-it` you will execute your reproducer, let's see.
 
@@ -469,7 +470,7 @@ i am a reproducer :)
 
 Your reproducer has been inserted on top of your runenv and now can be shared easily.
 
-Delete test_triple container and the associated image (you should delete also the container created during couple phase)
+Delete `test_triple` container and the associated image (you should delete also the container created during couple phase)
 
 ```
 (teaster) ➜  teaster git:(triple) ✗ docker rm test_triple
