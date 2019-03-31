@@ -24,9 +24,11 @@ Teaster: automate your dirty tester work and take time for a relaxing tea.
 
 `sudo rabbitmqctl set_permissions -p celery celery ".*" ".*" ".*"`
 
-### Setup dev env
+### Setup a dev env
 
-### Activatr dev env and install all the deps
+[click here](https://github.com/kinderp/teaster/blob/master/README.md#set-up-dev-environment)
+
+### Activate your dev env and install all the deps
 
 `antonio@linux-h1g7:~/dev/teaster> workon teaster`
 
