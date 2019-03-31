@@ -47,7 +47,7 @@ Please, follow the below instructions
 
 ### Run input interface
 
-`
+```
 (teaster) ➜  teaster git:(master) ✗ python main.py 
  * Serving Flask app "main" (lazy loading)
  * Environment: production
@@ -58,7 +58,7 @@ Please, follow the below instructions
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 208-391-154
-`
+```
 
 ### Run a consumer
 
