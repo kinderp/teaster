@@ -18,7 +18,10 @@ antonio@linux-h1g7:~> sudo rabbitmqctl add_vhost celery
 
 antonio@linux-h1g7:~> sudo rabbitmqctl set_user_tags celery celery
 
-sudo rabbitmqctl set_permissions -p celery celery ".*" ".*" ".*"
+antonio@linux-h1g7:~> sudo rabbitmqctl set_permissions -p celery celery ".*" ".*" ".*"
+
+antonio@linux-h1g7:~/dev> git clone https://github.com/kinderp/teaster.git
+
 
 # Introduction
 
