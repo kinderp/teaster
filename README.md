@@ -114,6 +114,28 @@ As you can see below, what a consumer does:
 
 3. It waits for a new message 
 
+You can verify that a consumer now exists from:
+
+1. rabbitmq side
+
+```
+(teaster) ➜  teaster git:(master) ✗ sudo rabbitmqctl list_consumers -p /
+Listing consumers
+6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b	<rabbit@linux-peu5.2.540.0>	ctag1.5ad98e68d87a4dbf877b51d89b3dbb5a	true	0	[]
+```
+
+2. teaster side
+
+```
+(teaster) ➜  teaster git:(master) ✗ curl http://localhost:5000/consumers
+{
+    "6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b": {
+        "id": "6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b", 
+        "product": "leap:42.3", 
+        "runenv": "docker"
+    }
+}
+```
 
 # Introduction
 
