@@ -461,6 +461,17 @@ Let's verify all has gone fine.
 
 ### Verify
 
+If you run your run env this time without -it you will run your reproducer
+
+```
+(teaster) ➜  teaster git:(triple) ✗ docker run --name test_triple registry.gitlab.com/caristia/antonio_suse/new_image 
+i am a reproducer :)
+```
+
+Your reproducer has been inserted on top of your runenv and now can be shared easily.
+
+Delete all yuor images
+
 
 
 # Introduction
