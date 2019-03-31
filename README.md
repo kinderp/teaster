@@ -137,6 +137,52 @@ Listing consumers
 }
 ```
 
+### Run celery input interface
+
+It accepts building request for your celery tasks
+
+```
+(teaster) ➜  teaster git:(master) ✗ python icelery.py
+ * Serving Flask app "icelery" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 208-391-154
+```
+
+### Run your celery workers
+
+```
+(teaster) ➜  teaster git:(master) ✗ celery worker -A icelery.celery --loglevel=info
+ 
+ -------------- celery@linux-peu5 v4.2.2 (windowlicker)
+---- **** ----- 
+--- * ***  * -- Linux-4.12.14-lp150.12.16-default-x86_64-with-glibc2.2.5 2019-03-31 12:50:41
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         icelery:0x7fbf0ac45250
+- ** ---------- .> transport:   amqp://celery:**@localhost:5672/celery
+- ** ---------- .> results:     disabled://
+- *** --- * --- .> concurrency: 4 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . icelery.build_docker
+
+[2019-03-31 12:50:42,123: INFO/MainProcess] Connected to amqp://celery:**@127.0.0.1:5672/celery
+[2019-03-31 12:50:42,408: INFO/MainProcess] mingle: searching for neighbors
+[2019-03-31 12:50:43,705: INFO/MainProcess] mingle: all alone
+[2019-03-31 12:50:43,757: INFO/MainProcess] celery@linux-peu5 ready.
+```
+
 # Introduction
 
 Here just some definitions to speak the same language.
