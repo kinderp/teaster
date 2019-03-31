@@ -219,6 +219,7 @@ r = requests.post("http://localhost:5000/couples", json=payload)
 * yourtag is the name of your image (it will be pushed in your docker registry) 
 * reproducer.repo is git url where teaster will commit a new Dockerfile for your runtime env
 
+---------------------------
 
 1. input interface output
 
@@ -351,6 +352,43 @@ RUN zypper --non-interactive in telnet && \
 
 CMD None
 ```
+
+The new image has been pushed on your personal registry so it's ready to be pulled from another machine
+In this case we just remove the image and pull to verify
+
+```
+➜  deleteme git:(opensuse) docker rmi $(docker images -qa)
+```
+
+```
+➜  deleteme git:(opensuse) docker images|grep antonio_suse
+
+```
+
+```
+➜  deleteme git:(opensuse) docker login registry.gitlab.com
+
+Login Succeeded
+```
+
+```
+➜  deleteme git:(opensuse) docker pull registry.gitlab.com/caristia/antonio_suse/new_image
+Using default tag: latest
+latest: Pulling from caristia/antonio_suse/new_image
+adec38add5d1: Already exists 
+935c6b6c3290: Already exists 
+545e84933fdc: Pull complete 
+3c034a37c68e: Pull complete 
+Digest: sha256:ec733ee8182c33da16543909fba2c74cec9cd84e7cd007b918a832c70d75c867
+Status: Downloaded newer image for registry.gitlab.com/caristia/antonio_suse/new_image:latest
+```
+
+```
+➜  deleteme git:(opensuse) docker run -it registry.gitlab.com/caristia/antonio_suse/new_image /bin/bash
+9e7a756c12a5:/workdir # ls
+Dockerfile  README.md
+```
+
 # Introduction
 
 Here just some definitions to speak the same language.
