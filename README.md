@@ -6,6 +6,12 @@ Teaster: automate your dirty tester work and take time for a relaxing tea.
 
 # Manual Installation
 
+A complete docker compose dev env is not ready yet, sorry. 
+
+But you can install all the necessary parts manually :)
+
+Please, follow the below instructions
+
 ### Install rabbitmq
 
 `sudo zypper in rabbitmq-server rabbitmq-server-plugins`
