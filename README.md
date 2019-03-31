@@ -41,9 +41,9 @@ Please, follow the below instructions
 `(teaster) antonio@linux-h1g7:~/dev/teaster> sudo pip install -r requirements.txt`
  
 
-# Run and test the ystem
+# Run and test the system
 
-:warning: teaster is just POC and it is in the early stage of his life. Does not exist any validation for the input requests yet and unit tests cover just a little part of the entire codebase. 
+:warning: teaster is just a POC and it is in the early stage of his hard life. Does not exist any validation for the input requests yet and unit tests cover just a little part of the entire codebase. So what teaster does well untill now is: it crashes :boom: and make you feel frustated :)
 
 ### Run input interface
 
