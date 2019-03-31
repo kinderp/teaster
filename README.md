@@ -182,6 +182,42 @@ It accepts building request for your celery tasks
 [2019-03-31 12:50:43,705: INFO/MainProcess] mingle: all alone
 [2019-03-31 12:50:43,757: INFO/MainProcess] celery@linux-peu5 ready.
 ```
+### Submit a request
+
+1 create and a new github/gitlab project 
+
+```
+echo "# deleteme" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/kinderp/deleteme.git
+git push -u origin master
+```
+
+2. prepare a request 
+
+```
+import requests
+
+payload = {
+        "id":"6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b",
+        "provenv":["zypper --non-interactive in telnet","zypper --non-interactive in vim"], 
+        "yourtag":"registry.gitlab.com/caristia/antonio_suse/new_image", 
+        "reproducer":{
+            "prova":"",
+            "repo":"https://github.com/kinderp/deleteme.git"
+        }
+
+}
+
+r = requests.post("http://localhost:5000/couples", json=payload)
+```
+
+* id is the consumer'id you want to contact
+* provenv is a list of command to install your rpm (--non-ineteractive is important, teaster is not smart until now)
+* reproducer.repo is git url where teaster will commit a new Dockerfile for your runtime env
+
 
 # Introduction
 
