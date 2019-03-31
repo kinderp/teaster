@@ -2,7 +2,7 @@
 
 Teaster: automate your dirty tester work and take time for a relaxing tea.
 
-![alt text](https://github.com/kinderp/teaster/blob/master/diagram1.jpg)
+![alt text](https://github.com/kinderp/teaster/blob/master/diagram1.png)
 
 # Introduction
 
