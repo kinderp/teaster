@@ -272,6 +272,29 @@ RUN zypper --non-interactive in telnet && \
 
 CMD None
 ```
+
+3. celery input interface output
+
+```
+127.0.0.1 - - [31/Mar/2019 13:27:14] "POST /build_docker HTTP/1.1" 200 -
+```
+
+4. worker output
+
+```
+[2019-03-31 13:27:14,130: WARNING/ForkPoolWorker-1] https://github.com/kinderp/deleteme.git
+[2019-03-31 13:27:14,131: WARNING/ForkPoolWorker-1] 1232456abc
+[2019-03-31 13:27:14,131: WARNING/ForkPoolWorker-1] opensuse
+[2019-03-31 13:27:14,132: WARNING/ForkPoolWorker-1] ==Cloning...==
+Username for 'https://github.com': kinderp
+Password for 'https://kinderp@github.com': 
+[2019-03-31 13:27:25,422: WARNING/ForkPoolWorker-1] ==Building...==
+
+... A lot of output ...
+
+[2019-03-31 13:29:05,146: WARNING/ForkPoolWorker-1] {u'progressDetail': {}, u'aux': {u'Tag': u'latest', u'Digest': u'sha256:ec733ee8182c33da16543909fba2c74cec9cd84e7cd007b918a832c70d75c867', u'Size': 1156}}
+[2019-03-31 13:29:05,147: INFO/ForkPoolWorker-1] Task icelery.build_docker[bd16221d-d4c0-4c21-b7d5-9adaf73029f8] succeeded in 111.017807808s: None
+```
 # Introduction
 
 Here just some definitions to speak the same language.
