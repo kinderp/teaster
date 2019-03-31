@@ -6,21 +6,25 @@ Teaster: automate your dirty tester work and take time for a relaxing tea.
 
 # Manual Installation
 
-antonio@linux-h1g7:~> sudo zypper in rabbitmq-server rabbitmq-server-plugins
+`sudo zypper in rabbitmq-server rabbitmq-server-plugins`
 
-antonio@linux-h1g7:~> sudo systemctl start rabbitmq-server
+`sudo systemctl start rabbitmq-server`
 
-antonio@linux-h1g7:~> sudo rabbitmq-plugins enable rabbitmq_management
+`sudo rabbitmq-plugins enable rabbitmq_management`
 
-antonio@linux-h1g7:~> sudo rabbitmqctl add_user celery celery
+`sudo rabbitmqctl add_user celery celery`
 
-antonio@linux-h1g7:~> sudo rabbitmqctl add_vhost celery
+`sudo rabbitmqctl add_vhost celery`
 
-antonio@linux-h1g7:~> sudo rabbitmqctl set_user_tags celery celery
+`sudo rabbitmqctl set_user_tags celery celery`
 
-antonio@linux-h1g7:~> sudo rabbitmqctl set_permissions -p celery celery ".*" ".*" ".*"
+`sudo rabbitmqctl set_permissions -p celery celery ".*" ".*" ".*"
+`
+`antonio@linux-h1g7:~/dev/teaster> workon teaster`
 
-antonio@linux-h1g7:~/dev> git clone https://github.com/kinderp/teaster.git
+`(teaster) antonio@linux-h1g7:~/dev/teaster> sudo pip install -r requirements.txt`
+ 
+
 
 
 # Introduction
