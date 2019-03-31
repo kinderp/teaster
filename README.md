@@ -167,7 +167,7 @@ It accepts building request for your celery tasks
 
 Be sure to have docker up and running
 
-``sudo systemctl status docker`
+`sudo systemctl status docker`
 
 
 ```
