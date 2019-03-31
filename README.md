@@ -20,6 +20,10 @@ Please, follow the below instructions
 
 `sudo rabbitmq-plugins enable rabbitmq_management`
 
+### Install docker
+
+
+
 ### Set conf for celery tasks
 
 `sudo rabbitmqctl add_user celery celery`
@@ -159,6 +163,12 @@ It accepts building request for your celery tasks
 ```
 
 ### Run your celery workers
+
+
+Be sure to have docker up and running
+
+``sudo systemctl status docker`
+
 
 ```
 (teaster) ➜  teaster git:(master) ✗ celery worker -A icelery.celery --loglevel=info
