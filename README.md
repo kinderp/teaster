@@ -45,6 +45,10 @@ Please, follow the below instructions
 
 :warning: teaster is just a POC and it is in the early stage of his hard life. Does not exist any validation for the input requests yet and unit tests cover just a little part of the entire codebase. So what teaster does well untill now is: it crashes :boom: and make you feel frustated :)
 
+## Create a couple
+
+See all the steps below
+
 ### Run input interface
 
 ```
@@ -388,6 +392,76 @@ Status: Downloaded newer image for registry.gitlab.com/caristia/antonio_suse/new
 9e7a756c12a5:/workdir # ls
 Dockerfile  README.md
 ```
+
+So a new couple (run env, prov env) has been correctly created
+
+## Create a triple
+
+Now you have your runtime env for testing.
+It's time to create a reproducer
+
+```
+➜  deleteme git:(opensuse) cat reproducer.sh 
+#!/bin/bash
+
+echo 'i am a reproducer :)'
+```
+
+and push it (remember that you are on opensuse branch)
+
+```
+➜  deleteme git:(opensuse) ✗ git add reproducer.sh 
+
+➜  deleteme git:(opensuse) ✗ git commit -m"added reproducer"
+[opensuse d723885] added reproducer
+ 1 file changed, 3 insertions(+)
+ create mode 100644 reproducer.sh
+
+➜  deleteme git:(opensuse) git push
+Username for 'https://github.com': kinderp
+Password for 'https://kinderp@github.com': 
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 362 bytes | 362.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/kinderp/deleteme.git
+   3fb0c41..d723885  opensuse -> opensuse
+
+```
+
+Now that you have a reproducer you can submit a triple creation request and teaster will put your reproducer
+on top of your runtime env
+
+create a request as below, be sure to use the correct consumer id and fill the reproducer.command field
+with the correct name of your reproducer on github (teaster is not smart enough to add x permission until now)
+
+
+```
+(teaster) ➜  teaster git:(triple) ✗ cat reqeust_create_triple.py 
+import requests
+
+payload = {
+        "id":"56b2479526326f276d6f426689f561f21c8563b561b2f4ba20f89895286f2dbf",
+        "provenv":["zypper --non-interactive in telnet","zypper --non-interactive in vim"], 
+        "yourtag":"registry.gitlab.com/caristia/antonio_suse/new_image", 
+        "reproducer":{
+            "command":"chmod u+x reproducer.sh && sh reproducer.sh",
+            "repo":"https://github.com/kinderp/deleteme.git"
+        }
+
+}
+
+r = requests.post("http://localhost:5000/triples", json=payload)
+
+```
+
+You will see a very similar output to the previous couple request.
+Let's verify all has gone fine.
+
+### Verify
+
+
 
 # Introduction
 
