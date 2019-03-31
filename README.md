@@ -22,7 +22,7 @@ Please, follow the below instructions
 
 ### Install docker
 
-
+`sudo zypper in docker`
 
 ### Set conf for celery tasks
 
