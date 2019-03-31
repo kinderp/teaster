@@ -4,6 +4,22 @@ Teaster: automate your dirty tester work and take time for a relaxing tea.
 
 ![alt text](https://github.com/kinderp/teaster/blob/master/diagram1.png)
 
+# Manual Installation
+
+antonio@linux-h1g7:~> sudo zypper in rabbitmq-server rabbitmq-server-plugins
+
+antonio@linux-h1g7:~> sudo systemctl start rabbitmq-server
+
+antonio@linux-h1g7:~> sudo rabbitmq-plugins enable rabbitmq_management
+
+antonio@linux-h1g7:~> sudo rabbitmqctl add_user celery celery
+
+antonio@linux-h1g7:~> sudo rabbitmqctl add_vhost celery
+
+antonio@linux-h1g7:~> sudo rabbitmqctl set_user_tags celery celery
+
+sudo rabbitmqctl set_permissions -p celery celery ".*" ".*" ".*"
+
 # Introduction
 
 Here just some definitions to speak the same language.
