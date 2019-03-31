@@ -253,6 +253,25 @@ r = requests.post("http://localhost:5000/couples", json=payload)
 
 ```
 
+2. consumer output
+
+* it just dequeues the request and create a runtime source (a Dockerfile in this case)
+* it sends a building request for this Dockerfile to the celery interface
+
+```
+ [x] Received '{"provenv": ["zypper --non-interactive in telnet", "zypper --non-interactive in vim"], "reproducer": {"repo": "https://github.com/kinderp/deleteme.git", "prova": ""}, "yourtag": "registry.gitlab.com/caristia/antonio_suse/new_image", "id": "6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b"}'
+
+FROM opensuse:42.3
+
+
+WORKDIR /workdir
+COPY . /workdir
+
+RUN zypper --non-interactive in telnet && \ 
+    zypper --non-interactive in vim 
+
+CMD None
+```
 # Introduction
 
 Here just some definitions to speak the same language.
