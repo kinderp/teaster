@@ -295,6 +295,62 @@ Password for 'https://kinderp@github.com':
 [2019-03-31 13:29:05,146: WARNING/ForkPoolWorker-1] {u'progressDetail': {}, u'aux': {u'Tag': u'latest', u'Digest': u'sha256:ec733ee8182c33da16543909fba2c74cec9cd84e7cd007b918a832c70d75c867', u'Size': 1156}}
 [2019-03-31 13:29:05,147: INFO/ForkPoolWorker-1] Task icelery.build_docker[bd16221d-d4c0-4c21-b7d5-9adaf73029f8] succeeded in 111.017807808s: None
 ```
+
+### Verify the result
+
+At the end of this process a new docker image is appeared
+
+```
+➜  deleteme git:(master) docker images|grep antonio_suse
+registry.gitlab.com/caristia/antonio_suse/new_image   latest              bcf7e2ce44ed        5 minutes ago       238MB
+```
+
+A dockerfile has been pushed on deleteme project (in a new branch named opensuse, it is a static name but it will be fixed)
+
+
+```
+➜  deleteme git:(master) ls
+README.md
+
+➜  deleteme git:(master) git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+➜  deleteme git:(master) git pull
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (6/6), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 5 (delta 2), reused 3 (delta 0), pack-reused 0
+Unpacking objects: 100% (5/5), done.
+From https://github.com/kinderp/deleteme
+ * [new branch]      opensuse   -> origin/opensuse
+Already up to date.
+
+➜  deleteme git:(master) ls
+README.md
+
+➜  deleteme git:(master) git checkout opensuse 
+Branch 'opensuse' set up to track remote branch 'opensuse' from 'origin'.
+Switched to a new branch 'opensuse'
+
+➜  deleteme git:(opensuse) ls
+Dockerfile  README.md
+
+➜  deleteme git:(opensuse) cat Dockerfile 
+
+FROM opensuse:42.3
+
+
+WORKDIR /workdir
+COPY . /workdir
+
+RUN zypper --non-interactive in telnet && \ 
+    zypper --non-interactive in vim 
+
+CMD None
+```
 # Introduction
 
 Here just some definitions to speak the same language.
