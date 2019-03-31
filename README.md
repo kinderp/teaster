@@ -216,8 +216,42 @@ r = requests.post("http://localhost:5000/couples", json=payload)
 
 * id is the consumer'id you want to contact
 * provenv is a list of command to install your rpm (--non-ineteractive is important, teaster is not smart until now)
+* yourtag is the name of your image (it will be pushed in your docker registry) 
 * reproducer.repo is git url where teaster will commit a new Dockerfile for your runtime env
 
+
+1. input interface output
+
+     * it receives the request and publishes that onto the correct queue using the id field
+     
+```
+[CoupleList:post] arrived data: 
+{
+    "id": "6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b", 
+    "provenv": [
+        "zypper --non-interactive in telnet", 
+        "zypper --non-interactive in vim"
+    ], 
+    "reproducer": {
+        "prova": "", 
+        "repo": "https://github.com/kinderp/deleteme.git"
+    }, 
+    "yourtag": "registry.gitlab.com/caristia/antonio_suse/new_image"
+}
+[CoupleList:post] producer, connecting to rabbit: 
+{
+    "exchange": "test", 
+    "exchange_type": "direct", 
+    "host": "localhost", 
+    "queue": "6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b", 
+    "routing": "6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b", 
+    "vhost": null, 
+    "wait_for_rabbit": false
+}
+ [*] Published message: {"provenv": ["zypper --non-interactive in telnet", "zypper --non-interactive in vim"], "reproducer": {"repo": "https://github.com/kinderp/deleteme.git", "prova": ""}, "yourtag": "registry.gitlab.com/caristia/antonio_suse/new_image", "id": "6dd47d81e014ad9de81161951814bf50e4e1246bb7a43404ffb84ab31ef7d18b"}
+127.0.0.1 - - [31/Mar/2019 13:12:02] "POST /couples HTTP/1.1" 200 -
+
+```
 
 # Introduction
 
