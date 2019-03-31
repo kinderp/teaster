@@ -41,6 +41,12 @@ Please, follow the below instructions
 `(teaster) antonio@linux-h1g7:~/dev/teaster> sudo pip install -r requirements.txt`
  
 
+# Run and test the ystem
+
+:warning: teaster is just POC and it is in the early stage of his life. Does not exist any validation for the input requests yet and unit tests cover just a little part of the entire codebase. 
+
+### Run input interface
+
 
 
 # Introduction
