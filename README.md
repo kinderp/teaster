@@ -6,11 +6,15 @@ Teaster: automate your dirty tester work and take time for a relaxing tea.
 
 # Manual Installation
 
+### Install rabbitmq
+
 `sudo zypper in rabbitmq-server rabbitmq-server-plugins`
 
 `sudo systemctl start rabbitmq-server`
 
 `sudo rabbitmq-plugins enable rabbitmq_management`
+
+### Set conf for celery tasks
 
 `sudo rabbitmqctl add_user celery celery`
 
@@ -18,8 +22,12 @@ Teaster: automate your dirty tester work and take time for a relaxing tea.
 
 `sudo rabbitmqctl set_user_tags celery celery`
 
-`sudo rabbitmqctl set_permissions -p celery celery ".*" ".*" ".*"
-`
+`sudo rabbitmqctl set_permissions -p celery celery ".*" ".*" ".*"`
+
+### Setup dev env
+
+### Activatr dev env and install all the deps
+
 `antonio@linux-h1g7:~/dev/teaster> workon teaster`
 
 `(teaster) antonio@linux-h1g7:~/dev/teaster> sudo pip install -r requirements.txt`
