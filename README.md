@@ -398,7 +398,7 @@ So a new couple (run env, prov env) has been correctly created
 ## Create a triple
 
 Now you have your runtime env for testing.
-It's time to create a reproducer
+It's time to create a reproducer.
 
 ```
 ➜  deleteme git:(opensuse) cat reproducer.sh 
@@ -431,14 +431,13 @@ To https://github.com/kinderp/deleteme.git
 ```
 
 Now that you have a reproducer you can submit a triple creation request and teaster will put your reproducer
-on top of your runtime env
+on top of your runtime env.
 
 create a request as below, be sure to use the correct consumer id and fill the reproducer.command field
 with the correct name of your reproducer on github (teaster is not smart enough to add x permission until now)
 
 
 ```
-(teaster) ➜  teaster git:(triple) ✗ cat reqeust_create_triple.py 
 import requests
 
 payload = {
@@ -457,11 +456,11 @@ r = requests.post("http://localhost:5000/triples", json=payload)
 ```
 
 You will see a very similar output to the previous couple request.
-Let's verify all has gone fine.
+Let's verify that all has gone fine.
 
 ### Verify
 
-If you run your run env this time without -it you will run your reproducer
+If you run your container this time without `-it` you will execute your reproducer, let's see.
 
 ```
 (teaster) ➜  teaster git:(triple) ✗ docker run --name test_triple registry.gitlab.com/caristia/antonio_suse/new_image 
@@ -470,7 +469,7 @@ i am a reproducer :)
 
 Your reproducer has been inserted on top of your runenv and now can be shared easily.
 
-Delete test_trople container and the associated image
+Delete test_triple container and the associated image (you should delete also the container created during couple phase)
 
 ```
 (teaster) ➜  teaster git:(triple) ✗ docker rm test_triple
