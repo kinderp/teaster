@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Create a new bug</title>
+	</head>
+	<body>
+		<form action="{% url 'core:bug_create' %}" method="POST">
+			{{ form_bug.as_p }}
+			{{ form_product.as_p }}
+			{% csrf_token %}
+			<input type="submit" value="Create">
+		</form>
+	</body>
+</html>
