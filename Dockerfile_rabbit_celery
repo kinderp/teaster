@@ -1,0 +1,7 @@
+FROM rabbitmq:3.6-management
+
+COPY init_rabbitmq_celery.sh /init.sh
+
+RUN chmod u+x /init.sh
+CMD ["/init.sh"]
+

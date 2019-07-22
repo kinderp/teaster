@@ -1,0 +1,15 @@
+FROM python:2.7-slim
+
+COPY . /myapp
+
+WORKDIR /myapp
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gcc python-dev git \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install -r requirements/icelery/requirements.txt \
+    && apt-get purge -y --auto-remove gcc python-dev
+
+EXPOSE 6000
+#CMD python icelery.py
+
