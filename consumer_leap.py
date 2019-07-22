@@ -4,6 +4,8 @@ import requests
 
 from settings import host_rabbit, vhost, queue, exchange, exchange_type, routing, wait_for_rabbit, wait_for_teaster
 
+from settings import host_icelery
+
 from adapter.concrete import AdapterDockerHLA
 from builder.command.concrete.docker import CreateBuildingContextDockerCommand
 
@@ -46,7 +48,7 @@ def my_callback(body):
         "working_branch": source["image"]["name"]
     }
 
-    r = requests.post("http://localhost:6000/build_docker", json=payload)
+    r = requests.post("http://{}:6000/build_docker".format(host_icelery), json=payload)
 
 conn_details = {
         "host" :host_rabbit, 

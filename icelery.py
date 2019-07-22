@@ -64,8 +64,6 @@ def build_docker(data):
 
 @app.route('/build_docker', methods=['POST'])
 def building_docker():
-    import pdb
-    pdb.set_trace()
     data = request.data
 
 
