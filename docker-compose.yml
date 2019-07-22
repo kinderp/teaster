@@ -5,7 +5,6 @@
 
 version: '3'
 services:
-
   rabbit:
     container_name: rabbit
     ports:
@@ -15,8 +14,11 @@ services:
         - teaster_net
     image: rabbitmq:3.6-management
     volumes:
-        - /mnt/rabbit:/var/lib/rabbitmq
-    
+        - rabbit_v:/var/lib/rabbitmq
+    restart: on-failure
+    env_file:
+        - ./.env
+
   teaster:
     container_name: teaster
     networks:
@@ -26,22 +28,69 @@ services:
       context: .
       dockerfile: Dockerfile_teaster
     volumes:
-        - ~/dev/teaster:/myapp
+        - .:/myapp
     ports:
         - "5000:5000"
+    depends_on:
+        - rabbit
+    restart: on-failure
+    env_file:
+        - ./.env
 
-  #  producer:
-  #    container_name: producer
-  #    networks:
-  #        - teaster_net
-  #    image: producer
-  #    build:
-  #      context: .
-  #      dockerfile: Dockerfile_producer
-  #    volumes:
-  #        - ~/dev/teaster:/myapp
-  #    
-  #
+  rabbit_celery:
+    container_name: rabbit_celery
+    ports:
+        - "15673:15672"
+        - "5673:5672"
+    networks:
+        - teaster_net
+    image: rabbit_celery
+    build:
+      context: .
+      dockerfile: Dockerfile_rabbit_celery
+    volumes:
+        - rabbit_celery_v:/var/lib/rabbitmq
+    restart: on-failure
+    env_file:
+        - ./.env
+
+  icelery:
+    container_name: icelery
+    networks:
+        - teaster_net
+    image: icelery
+    build:
+      context: .
+      dockerfile: Dockerfile_icelery
+    volumes:
+        - .:/myapp
+    ports:
+        - "6000:6000"
+    depends_on:
+        - rabbit_celery
+    restart: on-failure
+    env_file:
+        - ./.env
+    entrypoint: python icelery.py
+
+  worker_pool:
+    container_name: worker_pool 
+    networks:
+        - teaster_net
+    image: icelery
+    build:
+      context: .
+      dockerfile: Dockerfile_icelery
+    volumes:
+        - .:/myapp
+    depends_on:
+        - rabbit_celery
+        - icelery
+    restart: on-failure
+    env_file:
+        - ./.env
+    entrypoint: sh -c "sleep 30 &&
+                       celery worker -A icelery.celery --loglevel=info"
 
   consumer:
     container_name: consumer
@@ -52,10 +101,18 @@ services:
       context: .
       dockerfile: Dockerfile_consumer
     volumes:
-        - ~/dev/teaster:/myapp
- 
+        - .:/myapp
+    depends_on:
+        - rabbit
+        - teaster 
+    restart: on-failure
+    env_file:
+        - ./.env
 
 networks:
   teaster_net:
     external: true
 
+volumes:
+    rabbit_v:
+    rabbit_celery_v:
