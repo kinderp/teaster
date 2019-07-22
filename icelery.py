@@ -6,8 +6,10 @@ from builder.command.concrete.docker import CreateBuildingContextDockerCommand
 from builder.command.concrete.docker import BuildFromDirDockerCommand
 from builder.command.concrete.docker import PushDockerCommand
 
+from settings import host_rabbit_celery
+
 app = Flask(__name__)
-app.config['CELERY_BROKER_URL'] = 'pyamqp://celery:celery@localhost:5672/celery'
+app.config['CELERY_BROKER_URL'] = 'pyamqp://celery:celery@{}:5672/celery'.format(host_rabbit_celery)
 #app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])

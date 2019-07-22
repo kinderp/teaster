@@ -1,5 +1,6 @@
+import os
 # rabbit connection settings
-host_rabbit = 'localhost'
+host_rabbit = os.environ.get('RABBIT_HOST','localhost')
 vhost = None
 queue = 'test'
 exchange = 'test'
@@ -9,7 +10,10 @@ wait_for_rabbit = False
 wait_for_teaster = False
 
 # teaster connection settings
-host_teaster = 'localhost'
+host_teaster = os.environ.get('TEASTER_HOST', 'localhost')
+
+# 
+host_rabbit_celery = os.environ.get('RABBIT_CELERY_HOST', 'localhost')
 
 # build docker settings
 import os
