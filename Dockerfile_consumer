@@ -5,10 +5,10 @@ ADD . /myapp
 WORKDIR /myapp
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc python-dev \
+    && apt-get install -y --no-install-recommends git gcc python-dev \
     && rm -rf /var/lib/apt/lists/* \
     && pip install -r requirements.txt \
     && apt-get purge -y --auto-remove gcc python-dev
 
-CMD python consumer.py
+CMD python consumer_leap.py
 
