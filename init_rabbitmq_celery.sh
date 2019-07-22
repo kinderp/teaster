@@ -1,5 +1,5 @@
 # Create Rabbitmq user
-( sleep 15 ; \
+( sleep 20 ; \
 rabbitmqctl add_user celery celery ; \
 rabbitmqctl add_vhost celery ; \
 rabbitmqctl set_user_tags celery celery ; \

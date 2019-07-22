@@ -10,5 +10,5 @@ RUN apt-get update \
     && pip install -r requirements.txt \
     && apt-get purge -y --auto-remove gcc python-dev
 
-CMD python consumer_leap.py
+#CMD python consumer_leap.py
 

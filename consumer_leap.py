@@ -10,6 +10,7 @@ from builder.command.concrete.docker import CreateBuildingContextDockerCommand
 # docker-compose doesn't garantee anything about services startup order
 # so wait until rabbirmq connection is available
 
+
 result = Consumer.register('docker','leap:42.3', wait_for_teaster)
 
 print("registration result \n{}".format(json.dumps(result, indent=4, sort_keys=True)))
@@ -58,7 +59,6 @@ conn_details = {
 }
 
 print("producer, connecting to rabbit: \n{}".format(json.dumps(conn_details,indent=4, sort_keys=True)))
-
 
 p = Consumer(**conn_details)
 

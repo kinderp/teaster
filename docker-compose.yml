@@ -36,6 +36,9 @@ services:
     restart: on-failure
     env_file:
         - ./.env
+    stdin_open: true
+    tty: true
+
 
   rabbit_celery:
     container_name: rabbit_celery
@@ -72,6 +75,9 @@ services:
     env_file:
         - ./.env
     entrypoint: python icelery.py
+    stdin_open: true
+    tty: true
+
 
   worker_pool:
     container_name: worker_pool 
@@ -91,6 +97,9 @@ services:
         - ./.env
     entrypoint: sh -c "sleep 30 &&
                        celery worker -A icelery.celery --loglevel=info"
+    stdin_open: true
+    tty: true
+
 
   consumer:
     container_name: consumer
@@ -108,6 +117,10 @@ services:
     restart: on-failure
     env_file:
         - ./.env
+    entrypoint: sh -c "sleep 30 && python consumer_leap.py"
+    stdin_open: true
+    tty: true
+
 
 networks:
   teaster_net:
