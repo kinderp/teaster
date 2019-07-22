@@ -1,0 +1,4 @@
+flask
+celery
+docker
+gitpython
