@@ -1,14 +1,20 @@
 FROM python:2.7-slim
 
 COPY . /myapp
+ADD repo-key /
 
 WORKDIR /myapp
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc python-dev git \
+    && apt-get install -y --no-install-recommends gcc python-dev ssh git \
     && rm -rf /var/lib/apt/lists/* \
     && pip install -r requirements/icelery/requirements.txt \
     && apt-get purge -y --auto-remove gcc python-dev
+
+RUN chmod 600 /repo-key \
+    && echo "IdentityFile /repo-key" >> /etc/ssh/ssh_config \
+    && echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config             
+
 
 EXPOSE 6000
 #CMD python icelery.py

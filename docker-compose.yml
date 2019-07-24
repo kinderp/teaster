@@ -89,14 +89,14 @@ services:
       dockerfile: Dockerfile_icelery
     volumes:
         - .:/myapp
+        - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
         - rabbit_celery
         - icelery
     restart: on-failure
     env_file:
         - ./.env
-    entrypoint: sh -c "sleep 30 &&
-                       celery worker -A icelery.celery --loglevel=info"
+    entrypoint: sh -c "sleep 30 && celery worker -A icelery.celery --loglevel=info"
     stdin_open: true
     tty: true
 

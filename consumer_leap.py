@@ -35,7 +35,7 @@ def my_callback(body):
     """
     source = json.loads(body)
     source["image"] = {}
-    source["image"]["name"] = "opensuse"
+    source["image"]["name"] = "opensuse/leap"
     source["image"]["tag"] = "42.3"
 
     a = AdapterDockerHLA(source)
