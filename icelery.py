@@ -3,6 +3,7 @@ from celery import Celery
 import json
 
 from builder.command.concrete.docker import CreateBuildingContextDockerCommand
+from builder.command.concrete.docker import DestroyBuildingContextDockerCommand
 from builder.command.concrete.docker import BuildFromDirDockerCommand
 from builder.command.concrete.docker import PushDockerCommand
 
@@ -60,7 +61,8 @@ def build_docker(data):
     for line in pusher.execute():
         print(line)
 
-
+    # destroy current dir under teaster/builing
+    DestroyBuildingContextDockerCommand(destination_dir).execute()
 
 @app.route('/build_docker', methods=['POST'])
 def building_docker():
