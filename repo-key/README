@@ -1,0 +1,25 @@
+repo-key dir is used in many Dockerfiles like below
+
+RUN chmod 600 /repo-key \
+    && echo "IdentityFile /repo-key" >> /etc/ssh/ssh_config \
+    && echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+
+See Dockerfile_consumer or Dockerfile_icelery for an example.
+
+So it is expected that you create in this dir a ssh keys pair
+and add pub key in your github repo to garantee write access
+to all the containers that need it.
+Below instructions on how to add a pub key in your git project
+
+https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys
+
+you can generate in repo-key dir your keys pair in this way:
+
+ssh-keygen -q -t rsa -N '' -f repo-key
+
+after that you shoud have two files:
+
+- repo-key     (private key)
+- repo-key.pub (public key)
+
+Add repo-key.pub as explained in #deploy-keys above.
