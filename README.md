@@ -4,11 +4,13 @@ Teaster: automate your dirty tester work and take time for a relaxing tea.
 
 ![alt text](https://github.com/kinderp/teaster/blob/master/diagram1.png)
 
+# Auto Installation
+
+run `docker-compose up`into the root dir
+
 # Manual Installation
 
-A complete docker compose dev env is not ready yet, sorry. 
-
-But you can install all the necessary parts manually :)
+You can install all the necessary parts manually :)
 
 Please, follow the below instructions
 
