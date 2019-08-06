@@ -6,7 +6,11 @@ Teaster: automate your dirty tester work and take time for a relaxing tea.
 
 # Auto Installation
 
-run `docker-compose up`into the root dir
+* `sudo zypper in docker`
+* `sudo zypper in docker-compose`
+* `sudo systemctl start docker`
+
+finally run `docker-compose up`into the root dir
 
 # Manual Installation
 
